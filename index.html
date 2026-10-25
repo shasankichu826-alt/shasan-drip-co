@@ -1,131 +1,875 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title id="pageTitle">SHASAN DRIP CO</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-body{font-family:'Inter',sans-serif;background:#050505;color:#fff}
-.bebas{font-family:'Bebas Neue'} .gold{color:#FFD700} .gold-bg{background:linear-gradient(135deg,#D4AF37,#FFD700)}
-.glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border:1px solid rgba(255,215,0,0.1)}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHASAN DRIP CO</title>
+  <meta name="description" content="Shasan Drip Co - premium boys streetwear, modern outfits, island-wide delivery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --panel: #111111;
+      --panel-2: #171717;
+      --text: #ffffff;
+      --muted: #a1a1aa;
+      --gold: #f5d76e;
+      --gold-2: #d4af37;
+      --soft: #f5f0ea;
+      --card: rgba(255,255,255,0.03);
+      --stroke: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050505;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .bebas { font-family: 'Bebas Neue', sans-serif; }
+    .gold { color: var(--gold); }
+    .gold-bg {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #111;
+    }
+    .soft-bg { background: var(--soft); }
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .section-shell {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+    .product-card img { transition: transform 0.35s ease; }
+    .product-card:hover img { transform: scale(1.05); }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
 </head>
 <body>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <div class="section-shell flex items-center justify-between py-4">
+      <div class="flex items-center gap-3">
+        <div id="logoBox" class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212]">
+          <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" />
+          <span id="logoFallback" class="bebas text-2xl tracking-wide text-yellow-300">S</span>
+        </div>
+        <div>
+          <h1 id="brandName" class="bebas text-3xl tracking-[0.12em] text-yellow-300 leading-none">SHASAN DRIP CO</h1>
+          <p class="text-[10px] uppercase tracking-[0.28em] text-white/40">Trincomalee • since 2024</p>
+        </div>
+      </div>
 
-<nav class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-500/10">
-<div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
-<div class="flex items-center gap-4">
-<div id="logoBox" class="w-12 h-12 rounded-full gold-bg flex items-center justify-center font-black text-black text-xl overflow-hidden"><img id="logoImg" src="" class="w-full h-full object-cover hidden"><span id="logoText">S</span></div>
-<div><h1 id="brandName" class="bebas text-3xl tracking-widest leading-none gold">SHASAN DRIP CO</h1><p class="text-[10px] tracking-[0.4em] text-white/40">TRINCOMALEE • EST 2024</p></div>
-</div>
-<div class="flex gap-2">
-<button onclick="openAdmin()" class="bg-white text-black px-5 py-2 rounded-full text-xs font-black">EDIT SHOP ⚙️</button>
-<button onclick="openCart()" class="relative gold-bg p-3 rounded-full text-black">🛒 <span id="cartCount" class="absolute -top-2 -right-2 bg-white text-black text-xs w-6 h-6 rounded-full flex items-center justify-center font-black">0</span></button>
-</div>
-</div>
-</nav>
+      <nav class="hidden items-center gap-7 text-sm font-medium text-white/75 md:flex">
+        <a href="#home" class="transition hover:text-white">Home</a>
+        <a href="#shop" class="transition hover:text-white">Shop</a>
+        <a href="#collections" class="transition hover:text-white">Collections</a>
+        <a href="#reviews" class="transition hover:text-white">Reviews</a>
+        <a href="#contact" class="transition hover:text-white">Contact</a>
+      </nav>
 
-<section class="px-6 py-16 text-center md:text-left">
-<div class="max-w-7xl mx-auto">
-<p class="text-yellow-500 tracking-[0.4em] text-xs mb-4">ADMIN EDITABLE STORE</p>
-<h2 class="bebas text-6xl md:text-8xl leading-none">MANAGE<br><span class="gold">YOUR DRIP</span></h2>
-<p class="text-white/40 mt-4 max-w-lg">Top right la EDIT SHOP click panni nee than dress, logo, price ellam maathalam da machaan!</p>
-</div>
-</section>
+      <div class="flex items-center gap-3">
+        <button id="adminToggle" class="hidden rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white md:inline-flex">
+          Edit Shop
+        </button>
+        <button id="cartToggle" class="relative gold-bg rounded-full px-4 py-2 text-sm font-black shadow-lg shadow-yellow-500/20">
+          🛒 Cart <span id="cartCount" class="ml-2 rounded-full bg-black px-2 py-0.5 text-[10px] text-yellow-300">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
 
-<div id="productGrid" class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-5 pb-20"></div>
+  <main>
+    <section id="home" class="section-shell py-16 md:py-20">
+      <div class="grid items-center gap-10 md:grid-cols-2">
+        <div>
+          <p class="mb-5 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.38em] text-yellow-300">
+            premium boys streetwear
+          </p>
+          <h2 class="bebas text-6xl leading-none text-white md:text-8xl">
+            Dress bold.<br />
+            <span class="gold">Drip harder.</span>
+          </h2>
+          <p class="mt-5 max-w-xl text-base text-white/65 md:text-lg">
+            Elevate everyday wear with modern boys’ fashion built for comfort, attitude, and confidence. Fresh drops, premium materials, and island-wide delivery.
+          </p>
 
-<footer class="py-10 text-center border-t border-yellow-500/10"><p id="footerBrand" class="bebas text-2xl gold">SHASAN DRIP CO</p><p class="text-xs text-white/20 mt-2">0778014156 | 0751415841</p></footer>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#shop" class="gold-bg rounded-full px-6 py-3 text-sm font-black uppercase tracking-[0.15em]">Shop now</a>
+            <a href="#collections" class="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-black uppercase tracking-[0.15em] text-white">Explore drops</a>
+          </div>
 
-<!-- CART -->
-<div id="cartDrawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/80" onclick="closeCart()"></div><div class="absolute right-0 top-0 h-full w-full max-w-sm bg-[#0F0F0F] p-6 flex flex-col"><div class="flex justify-between mb-6"><h4 class="bebas text-3xl">CART</h4><button onclick="closeCart()">×</button></div><div id="cartItems" class="flex-1 overflow-auto space-y-3"></div><div class="border-t border-yellow-500/10 pt-4 mt-4"><input id="custName" placeholder="Your Name" class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm mb-2"><input id="custCity" placeholder="City / Address" class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm mb-4"><div class="flex justify-between mb-4"><span>TOTAL</span><span id="cartTotal" class="gold font-black">LKR 0</span></div><button onclick="checkoutWhatsApp(1)" class="w-full bg-[#25D366] text-black py-4 rounded-full font-black mb-2">ORDER 0778014156</button><button onclick="checkoutWhatsApp(2)" class="w-full bg-white text-black py-3 rounded-full font-bold">ORDER 0751415841</button></div></div></div>
+          <div class="mt-9 flex flex-wrap items-center gap-8 text-sm text-white/70">
+            <div>
+              <p class="text-2xl font-black text-white">10k+</p>
+              <span>happy customers</span>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-white">4.9/5</p>
+              <span>customer rating</span>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-white">24H</p>
+              <span>quick dispatch</span>
+            </div>
+          </div>
+        </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminDrawer" class="fixed inset-0 z-[110] hidden"><div class="absolute inset-0 bg-black/90" onclick="closeAdmin()"></div><div class="absolute right-0 top-0 h-full w-full max-w-[480px] bg-[#111] border-l border-yellow-500/20 p-6 overflow-auto">
-<div class="flex justify-between mb-6"><h3 class="bebas text-4xl gold">EDIT SHOP</h3><button onclick="closeAdmin()" class="w-10 h-10 border rounded-full">×</button></div>
+        <div class="relative">
+          <div class="absolute -left-6 top-10 h-52 w-52 rounded-full bg-yellow-300/20 blur-3xl"></div>
+          <div class="absolute -right-8 bottom-8 h-56 w-56 rounded-full bg-amber-200/10 blur-3xl"></div>
+          <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#121212] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="Boys fashion styling" class="h-[620px] w-full rounded-[1.5rem] object-cover" />
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-4 mb-6">
-<p class="font-black text-sm mb-3">1. LOGO & BRAND MAATHU DA</p>
-<label class="text-xs text-white/50">Shop Name</label><input id="editBrand" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3" placeholder="SHASAN DRIP CO">
-<label class="text-xs text-white/50">Logo Image (Phone la irunthu select pannu)</label><input type="file" id="editLogo" accept="image/*" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3">
-<div class="flex gap-2"><button onclick="saveBrand()" class="flex-1 gold-bg text-black py-2 rounded-full font-black text-xs">SAVE BRAND</button><button onclick="resetLogo()" class="flex-1 border py-2 rounded-full text-xs">RESET</button></div>
-</div>
+    <section class="section-shell pb-12">
+      <div class="grid gap-4 md:grid-cols-4">
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+          <div class="mb-3 text-2xl">🔥</div>
+          <p class="text-lg font-bold">Streetwear</p>
+          <p class="text-sm text-white/50">Fresh oversized fits</p>
+        </div>
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+          <div class="mb-3 text-2xl">🧥</div>
+          <p class="text-lg font-bold">Essentials</p>
+          <p class="text-sm text-white/50">Daily comfort wear</p>
+        </div>
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+          <div class="mb-3 text-2xl">⚡</div>
+          <p class="text-lg font-bold">Urban Style</p>
+          <p class="text-sm text-white/50">Sharper looks</p>
+        </div>
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+          <div class="mb-3 text-2xl">🎁</div>
+          <p class="text-lg font-bold">Gift Ready</p>
+          <p class="text-sm text-white/50">Easy gifting options</p>
+        </div>
+      </div>
+    </section>
 
-<div class="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6">
-<p class="font-black text-sm mb-3">2. PUTHU DRESS ADD PANNU DA</p>
-<input id="pName" placeholder="Dress Name (ex: BLACK HOODIE)" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2">
-<input id="pPrice" type="number" placeholder="Price (ex: 5990)" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2">
-<select id="pCat" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2"><option value="hoodie">Hoodie</option><option value="tee">Tee</option><option value="jacket">Jacket</option><option value="pant">Pant</option></select>
-<label class="text-xs text-white/50">Dress Photo (Phone Gallery la irunthu)</label><input type="file" id="pImage" accept="image/*" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3">
-<button onclick="addProduct()" class="w-full bg-white text-black py-3 rounded-full font-black">+ ADD DRESS TO SHOP</button>
-<p class="text-[10px] text-white/20 mt-2">Photo select panna than add pannu da, auto save aayidum!</p>
-</div>
+    <section id="collections" class="section-shell py-16">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Featured</p>
+          <h3 class="mt-2 bebas text-5xl text-white">Popular collections</h3>
+        </div>
+        <a href="#shop" class="text-sm font-semibold text-yellow-300 underline underline-offset-8">Explore all</a>
+      </div>
 
-<div class="mb-6">
-<p class="font-black text-sm mb-3">3. IRUKURA DRESS-A DELETE / EDIT PANNU</p>
-<div id="adminProductList" class="space-y-2"></div>
-</div>
+      <div id="featuredProducts" class="grid gap-6 md:grid-cols-4"></div>
+    </section>
 
-<button onclick="clearAllProducts()" class="w-full border border-red-500/30 text-red-400 py-3 rounded-full text-xs">CLEAR ALL DRESSES</button>
-<p class="text-[10px] text-white/20 text-center mt-4">Ellam phone la save aayidum da, refresh pannalum pogathu!</p>
-</div></div>
+    <section id="shop" class="bg-[#111111] py-16">
+      <div class="section-shell">
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Catalogue</p>
+            <h3 class="mt-2 bebas text-5xl text-white">Shop the drop</h3>
+          </div>
+          <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
+        </div>
 
-<script>
-let products = JSON.parse(localStorage.getItem('shasan_products')) || 'null');
-if(!products){
-products = [
-{id:1, name:"OVERSIZED HOODIE BLACK GOLD", price:5990, img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800", cat:"hoodie"},
-{id:2, name:"CROWN DRIP GRAPHIC TEE", price:2990, img:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800", cat:"tee"},
-{id:3, name:"ESSENTIAL HOODIE SHASAN", price:5490, img:"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800", cat:"hoodie"},
-{id:4, name:"DRIP CO TEE GOLD PRINT", price:2890, img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800", cat:"tee"},
-];
-}
-let brand = localStorage.getItem('shasan_brand') || 'SHASAN DRIP CO';
-let logo = localStorage.getItem('shasan_logo') || '';
-let cart=[];
+        <div id="productGrid" class="grid gap-6 md:grid-cols-4"></div>
+      </div>
+    </section>
 
-function saveToStorage(){ localStorage.setItem('shasan_products', JSON.stringify(products)); }
-function loadBrand(){ document.getElementById('brandName').innerText=brand; document.getElementById('footerBrand').innerText=brand; document.getElementById('pageTitle').innerText=brand; document.getElementById('editBrand').value=brand; document.getElementById('logoText').innerText=brand.charAt(0); if(logo){ document.getElementById('logoImg').src=logo; document.getElementById('logoImg').classList.remove('hidden'); document.getElementById('logoText').classList.add('hidden'); } }
-loadBrand();
+    <section class="section-shell py-16">
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
+          <div class="mb-4 text-3xl">✅</div>
+          <h4 class="text-2xl font-black">Premium quality</h4>
+          <p class="mt-3 text-white/60">Made with durable fabrics and clean modern finishing for long-lasting wear.</p>
+        </div>
+        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
+          <div class="mb-4 text-3xl">🚚</div>
+          <h4 class="text-2xl font-black">Island-wide delivery</h4>
+          <p class="mt-3 text-white/60">Fast shipping across Sri Lanka with careful packaging and reliable handling.</p>
+        </div>
+        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
+          <div class="mb-4 text-3xl">💬</div>
+          <h4 class="text-2xl font-black">Easy ordering</h4>
+          <p class="mt-3 text-white/60">Order directly through WhatsApp or complete the secure checkout flow below.</p>
+        </div>
+      </div>
+    </section>
 
-function renderProducts(){
-const grid=document.getElementById('productGrid'); const adminList=document.getElementById('adminProductList');
-grid.innerHTML=''; adminList.innerHTML='';
-products.forEach((p,i)=>{
-grid.innerHTML+=`<div class="glass rounded-2xl overflow-hidden group"><img src="${p.img}" class="w-full aspect-square object-cover"><div class="p-3"><p class="text-[11px] font-bold h-8">${p.name}</p><div class="flex justify-between items-center mt-2"><span class="gold font-black text-sm">LKR ${p.price}</span><span class="text-[9px] bg-white/10 px-2 py-1 rounded-full">${p.cat}</span></div><button onclick="addToCart(${p.id})" class="w-full mt-3 bg-white text-black py-2 rounded-full text-xs font-black">ADD TO CART</button></div></div>`;
-adminList.innerHTML+=`<div class="flex gap-2 bg-black p-2 rounded-xl"><img src="${p.img}" class="w-12 h-12 rounded object-cover"><div class="flex-1"><p class="text-xs font-bold">${p.name}</p><p class="text-xs gold">LKR ${p.price}</p></div><button onclick="deleteProduct(${i})" class="bg-red-500/20 text-red-400 px-3 rounded-full text-xs">DELETE</button></div>`;
-});
-}
+    <section id="reviews" class="section-shell py-16">
+      <div class="mb-10 text-center">
+        <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Reviews</p>
+        <h3 class="mt-2 bebas text-5xl text-white">What customers say</h3>
+      </div>
 
-function addProduct(){
-let name=document.getElementById('pName').value; let price=document.getElementById('pPrice').value; let cat=document.getElementById('pCat').value; let file=document.getElementById('pImage').files[0];
-if(!name||!price||!file){alert('Name, Price, Photo ellam podu da machaan!'); return;}
-let reader=new FileReader(); reader.onload=function(e){
-products.unshift({id:Date.now(), name:name.toUpperCase(), price:parseInt(price), img:e.target.result, cat:cat});
-saveToStorage(); renderProducts(); document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pImage').value=''; alert('Dress add aayiduchu da! 🔥');
-}; reader.readAsDataURL(file);
-}
-function deleteProduct(i){ if(confirm('Delete panava da?')){ products.splice(i,1); saveToStorage(); renderProducts(); } }
-function clearAllProducts(){ if(confirm('Full ah clear panava?')){ products=[]; saveToStorage(); renderProducts(); } }
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+          <div class="mb-4 text-yellow-400">★★★★★</div>
+          <p class="text-white/80">“The quality is excellent and the fit is perfect. My son wears them everywhere.”</p>
+          <div class="mt-6">
+            <p class="font-bold text-white">Nimal R.</p>
+            <p class="text-sm text-white/45">Verified buyer</p>
+          </div>
+        </div>
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+          <div class="mb-4 text-yellow-400">★★★★★</div>
+          <p class="text-white/80">“Very stylish and comfortable. We’ve ordered twice already and the service was smooth.”</p>
+          <div class="mt-6">
+            <p class="font-bold text-white">Ashen K.</p>
+            <p class="text-sm text-white/45">Verified buyer</p>
+          </div>
+        </div>
+        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
+          <div class="mb-4 text-yellow-400">★★★★★</div>
+          <p class="text-white/80">“The design feels premium and the delivery was fast. Definitely worth it.”</p>
+          <div class="mt-6">
+            <p class="font-bold text-white">Rashad S.</p>
+            <p class="text-sm text-white/45">Verified buyer</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-function saveBrand(){
-let newBrand=document.getElementById('editBrand').value; let file=document.getElementById('editLogo').files[0];
-if(newBrand){ brand=newBrand.toUpperCase(); localStorage.setItem('shasan_brand', brand); }
-if(file){ let r=new FileReader(); r.onload=function(e){ logo=e.target.result; localStorage.setItem('shasan_logo', logo); loadBrand(); alert('Logo maathi aachu da!'); }; r.readAsDataURL(file); } else { loadBrand(); alert('Brand name save aayiduchu da!'); }
-}
-function resetLogo(){ localStorage.removeItem('shasan_logo'); localStorage.removeItem('shasan_brand'); brand='SHASAN DRIP CO'; logo=''; document.getElementById('logoImg').classList.add('hidden'); document.getElementById('logoText').classList.remove('hidden'); loadBrand(); }
+    <section id="contact" class="border-t border-white/10 bg-white/5 py-16">
+      <div class="section-shell flex flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Stay in touch</p>
+          <h3 class="mt-2 bebas text-5xl text-white">Get the latest drops</h3>
+        </div>
 
-function addToCart(id){ cart.push(products.find(x=>x.id===id)); updateCart(); openCart(); }
-function updateCart(){ document.getElementById('cartCount').innerText=cart.length; let total=0, html=''; cart.forEach((c,i)=>{ total+=c.price; html+=`<div class="flex gap-3 bg-white/5 p-3 rounded-xl"><img src="${c.img}" class="w-12 h-12 rounded"><div class="flex-1"><p class="text-xs">${c.name}</p><p class="text-yellow-500 text-xs">LKR ${c.price}</p></div><button onclick="removeCart(${i})">×</button></div>`; }); document.getElementById('cartItems').innerHTML=html||'<p class="text-white/30 text-center mt-10">Cart empty da!</p>'; document.getElementById('cartTotal').innerText='LKR '+total; }
-function removeCart(i){ cart.splice(i,1); updateCart(); }
-function openCart(){ document.getElementById('cartDrawer').classList.remove('hidden'); }
-function closeCart(){ document.getElementById('cartDrawer').classList.add('hidden'); }
-function openAdmin(){ document.getElementById('adminDrawer').classList.remove('hidden'); renderProducts(); }
-function closeAdmin(){ document.getElementById('adminDrawer').classList.add('hidden'); }
-function checkoutWhatsApp(num){ if(cart.length===0){alert('Cart empty!'); return;} let name=document.getElementById('custName').value||'Customer'; let city=document.getElementById('custCity').value||''; let total=cart.reduce((a,b)=>a+b.price,0); let msg=`*NEW ORDER - ${brand}*%0A%0AName: ${name}%0ACity: ${city}%0A%0A`; cart.forEach((c,i)=>{ msg+=`${i+1}. ${c.name} - LKR ${c.price}%0A`; }); msg+=`%0ATotal: LKR ${total}%0A`; let phone=num===1?"94778014156":"94751415841"; window.open(`https://wa.me/${phone}?text=${msg}`, '_blank'); }
-renderProducts();
-</script>
+        <div class="flex w-full max-w-xl flex-col gap-3 sm:flex-row">
+          <input id="newsletterEmail" type="email" placeholder="Enter your email" class="w-full rounded-full border border-white/10 bg-[#101010] px-5 py-3 text-white placeholder:text-white/40 focus:border-yellow-400/60 focus:outline-none" />
+          <button class="gold-bg rounded-full px-6 py-3 text-sm font-black uppercase tracking-[0.15em]">Subscribe</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 bg-black py-8">
+    <div class="section-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="bebas text-3xl tracking-[0.12em] text-yellow-300">SHASAN DRIP CO</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 text-sm text-white/60">
+        <a href="#shop" class="hover:text-white">Shop</a>
+        <a href="#collections" class="hover:text-white">Collections</a>
+        <a href="#reviews" class="hover:text-white">Reviews</a>
+        <a href="https://wa.me/94778014156" target="_blank" class="hover:text-white">WhatsApp</a>
+      </div>
+      <p class="text-sm text-white/45">© 2026 Shasan Drip Co</p>
+    </div>
+  </footer>
+
+  <aside id="cartDrawer" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/70" id="cartBackdrop"></div>
+    <div class="absolute right-0 top-0 flex h-full w-full max-w-md flex-col bg-[#0d0d0d] shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 p-5">
+        <h4 class="text-2xl font-black">Your cart</h4>
+        <button id="closeCart" class="rounded-full border border-white/15 px-3 py-1 text-sm">Close</button>
+      </div>
+
+      <div id="cartItems" class="scrollbar-hide flex-1 space-y-4 overflow-y-auto p-5"></div>
+
+      <div class="border-t border-white/10 p-5">
+        <div class="mb-3 flex items-center justify-between text-sm text-white/70">
+          <span>Subtotal</span>
+          <span id="subtotalValue">LKR 0</span>
+        </div>
+        <div class="mb-4 flex items-center justify-between text-sm text-white/70">
+          <span>Delivery</span>
+          <span id="deliveryValue">LKR 0</span>
+        </div>
+        <div class="mb-5 flex items-center justify-between text-lg font-black text-white">
+          <span>Total</span>
+          <span id="totalValue">LKR 0</span>
+        </div>
+        <button id="checkoutBtn" class="gold-bg w-full rounded-full px-5 py-3 font-black uppercase tracking-[0.15em]">Proceed to checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <aside id="checkoutDrawer" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/70" id="checkoutBackdrop"></div>
+    <div class="absolute right-0 top-0 h-full w-full max-w-xl overflow-y-auto bg-[#0d0d0d] p-6 shadow-2xl">
+      <div class="mb-6 flex items-center justify-between">
+        <h4 class="text-3xl font-black">Checkout</h4>
+        <button id="closeCheckout" class="rounded-full border border-white/15 px-3 py-1 text-sm">Close</button>
+      </div>
+
+      <form id="checkoutForm" class="space-y-5">
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Full name</label>
+            <input id="customerName" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Your name" />
+          </div>
+          <div>
+            <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Phone number</label>
+            <input id="customerPhone" type="tel" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="077xxxxxxx" />
+          </div>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Email</label>
+          <input id="customerEmail" type="email" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="name@example.com" />
+        </div>
+
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Delivery address</label>
+          <textarea id="customerAddress" rows="3" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Street, town, city"></textarea>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Delivery city</label>
+          <input id="customerCity" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Colombo, Trincomalee, etc." />
+        </div>
+
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Payment method</label>
+          <div class="grid gap-3 md:grid-cols-2">
+            <label class="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-[#121212] p-3">
+              <input type="radio" name="payment" value="Bank Transfer" checked class="accent-yellow-400" />
+              <span>Bank transfer</span>
+            </label>
+            <label class="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-[#121212] p-3">
+              <input type="radio" name="payment" value="Cash on Delivery" class="accent-yellow-400" />
+              <span>Cash on delivery</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="rounded-[1.5rem] border border-white/10 bg-[#111111] p-4">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-white/45">Order summary</p>
+          <div id="checkoutSummary" class="space-y-2 text-sm text-white/70"></div>
+          <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-3 text-base font-black text-white">
+            <span>Total</span>
+            <span id="checkoutTotal">LKR 0</span>
+          </div>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Order notes</label>
+          <textarea id="customerNotes" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Optional notes"></textarea>
+        </div>
+
+        <button type="submit" class="gold-bg w-full rounded-full px-5 py-3 font-black uppercase tracking-[0.15em]">Place order</button>
+      </form>
+    </div>
+  </aside>
+
+  <aside id="adminDrawer" class="fixed inset-0 z-[70] hidden">
+    <div class="absolute inset-0 bg-black/80" id="adminBackdrop"></div>
+    <div class="absolute right-0 top-0 h-full w-full max-w-2xl overflow-y-auto bg-[#0d0d0d] p-6 shadow-2xl">
+      <div class="mb-6 flex items-center justify-between">
+        <h4 class="text-3xl font-black">Edit shop</h4>
+        <button id="closeAdmin" class="rounded-full border border-white/15 px-3 py-1 text-sm">Close</button>
+      </div>
+
+      <div class="space-y-6">
+        <div class="rounded-[1.5rem] border border-yellow-400/20 bg-yellow-400/5 p-5">
+          <p class="mb-4 font-black uppercase tracking-[0.2em] text-yellow-300">Brand settings</p>
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Brand name</label>
+          <input id="brandInput" class="mb-4 w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white focus:border-yellow-400/60 focus:outline-none" placeholder="SHASAN DRIP CO" />
+          <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Brand logo</label>
+          <input id="logoInput" type="file" accept="image/*" class="mb-4 w-full rounded-2xl border border-dashed border-white/15 bg-[#121212] px-4 py-4 text-sm text-white/60" />
+          <button id="saveBrandBtn" class="gold-bg rounded-full px-5 py-3 font-black uppercase tracking-[0.15em]">Save brand</button>
+        </div>
+
+        <div class="rounded-[1.5rem] border border-white/10 bg-[#111111] p-5">
+          <p class="mb-4 font-black uppercase tracking-[0.2em] text-white">Add product</p>
+          <div class="grid gap-4 md:grid-cols-2">
+            <div class="md:col-span-2">
+              <input id="productName" placeholder="Product name" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
+            </div>
+            <div>
+              <input id="productPrice" type="number" min="0" placeholder="Price (LKR)" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
+            </div>
+            <div>
+              <select id="productCategory" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white focus:border-yellow-400/60 focus:outline-none">
+                <option value="streetwear">Streetwear</option>
+                <option value="essentials">Essentials</option>
+                <option value="urban">Urban</option>
+                <option value="gift">Gift</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <input id="productImage" type="file" accept="image/*" class="w-full rounded-2xl border border-dashed border-white/15 bg-[#121212] px-4 py-4 text-sm text-white/60" />
+            </div>
+          </div>
+          <button id="addProductBtn" class="mt-4 w-full gold-bg rounded-full px-5 py-3 font-black uppercase tracking-[0.15em]">Add product</button>
+        </div>
+
+        <div class="rounded-[1.5rem] border border-white/10 bg-[#111111] p-5">
+          <p class="mb-4 font-black uppercase tracking-[0.2em] text-white">Current products</p>
+          <div id="adminProductList" class="space-y-3"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 z-[80] hidden -translate-x-1/2 rounded-full bg-white px-4 py-2 text-sm font-bold text-black shadow-xl"></div>
+
+  <script>
+    const defaultProducts = [
+      { id: 1, name: 'Urban Street Hoodie', price: 4990, category: 'streetwear', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80' },
+      { id: 2, name: 'Signature Tee Gold', price: 2990, category: 'essentials', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80' },
+      { id: 3, name: 'Classic Oversized Set', price: 5490, category: 'urban', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80' },
+      { id: 4, name: 'Minimal Street Fit', price: 4590, category: 'streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80' },
+      { id: 5, name: 'Premium School Tee', price: 2890, category: 'essentials', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80' },
+      { id: 6, name: 'Gold Print Hoodie', price: 5990, category: 'urban', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80' },
+      { id: 7, name: 'Weekend Casual Set', price: 5190, category: 'streetwear', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80' },
+      { id: 8, name: 'Gift Combo Pack', price: 6400, category: 'gift', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80' }
+    ];
+
+    const state = {
+      activeCategory: 'all',
+      cart: JSON.parse(localStorage.getItem('shasan_cart') || '[]'),
+      products: JSON.parse(localStorage.getItem('shasan_products') || 'null') || defaultProducts,
+      brand: localStorage.getItem('shasan_brand') || 'SHASAN DRIP CO',
+      logo: localStorage.getItem('shasan_logo') || ''
+    };
+
+    const money = value => `LKR ${Number(value).toLocaleString('en-LK')}`;
+
+    function saveCart() {
+      localStorage.setItem('shasan_cart', JSON.stringify(state.cart));
+    }
+
+    function saveProducts() {
+      localStorage.setItem('shasan_products', JSON.stringify(state.products));
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.add('hidden'), 1800);
+    }
+
+    function renderBrand() {
+      const brandName = document.getElementById('brandName');
+      const brandInput = document.getElementById('brandInput');
+      const title = document.querySelector('title');
+
+      if (brandName) brandName.textContent = state.brand.toUpperCase();
+      if (brandInput) brandInput.value = state.brand;
+      if (title) title.textContent = state.brand.toUpperCase();
+
+      const logoImg = document.getElementById('logoImg');
+      const logoFallback = document.getElementById('logoFallback');
+
+      if (state.logo) {
+        if (logoImg) {
+          logoImg.src = state.logo;
+          logoImg.classList.remove('hidden');
+        }
+        if (logoFallback) logoFallback.classList.add('hidden');
+      } else {
+        if (logoImg) {
+          logoImg.src = '';
+          logoImg.classList.add('hidden');
+        }
+        if (logoFallback) logoFallback.classList.remove('hidden');
+      }
+    }
+
+    function getCategories() {
+      return ['all', ...new Set(state.products.map(p => p.category))];
+    }
+
+    function renderCategoryFilters() {
+      const filters = document.getElementById('categoryFilters');
+      if (!filters) return;
+
+      filters.innerHTML = getCategories().map(category => {
+        const label = category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1);
+        const active = state.activeCategory === category ? 'bg-yellow-400 text-black' : 'border border-white/10 bg-white/5 text-white';
+        return `<button data-category="${category}" class="rounded-full px-4 py-2 text-sm font-semibold ${active}">${label}</button>`;
+      }).join('');
+
+      filters.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          state.activeCategory = button.dataset.category;
+          renderCategoryFilters();
+          renderProducts();
+        });
+      });
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      const featured = document.getElementById('featuredProducts');
+
+      if (!grid || !featured) return;
+
+      const filteredProducts = state.activeCategory === 'all'
+        ? state.products
+        : state.products.filter(item => item.category === state.activeCategory);
+
+      const featuredList = state.products.slice(0, 4);
+
+      featured.innerHTML = featuredList.map(product => `
+        <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111]">
+          <div class="overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover" />
+          </div>
+          <div class="p-4">
+            <div class="mb-2 flex items-center justify-between gap-3">
+              <h4 class="text-lg font-black text-white">${product.name}</h4>
+              <span class="text-sm font-bold text-yellow-300">${money(product.price)}</span>
+            </div>
+            <button data-add-product="${product.id}" class="w-full rounded-full bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-black">Add to cart</button>
+          </div>
+        </article>
+      `).join('');
+
+      grid.innerHTML = filteredProducts.map(product => `
+        <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
+          <div class="overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover" />
+          </div>
+          <div class="p-4">
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-yellow-300">
+                ${product.category}
+              </span>
+              <span class="text-lg font-black text-white">${money(product.price)}</span>
+            </div>
+            <h4 class="mb-4 text-lg font-black text-white">${product.name}</h4>
+            <button data-add-product="${product.id}" class="gold-bg w-full rounded-full px-4 py-3 text-sm font-black uppercase tracking-[0.12em]">Add to cart</button>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-add-product]').forEach(button => {
+        button.addEventListener('click', () => addToCart(Number(button.dataset.addProduct)));
+      });
+    }
+
+    function addToCart(productId) {
+      const product = state.products.find(item => item.id === productId);
+      if (!product) return;
+
+      const existing = state.cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        state.cart.push({ id: productId, quantity: 1 });
+      }
+
+      saveCart();
+      updateCart();
+      showToast(`${product.name} added to cart`);
+    }
+
+    function changeCartQuantity(productId, delta) {
+      const item = state.cart.find(entry => entry.id === productId);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        state.cart = state.cart.filter(entry => entry.id !== productId);
+      }
+
+      saveCart();
+      updateCart();
+    }
+
+    function removeFromCart(productId) {
+      state.cart = state.cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCart();
+    }
+
+    function getCartDetails() {
+      const items = state.cart.map(cartItem => {
+        const product = state.products.find(item => item.id === cartItem.id);
+        if (!product) return null;
+        const quantity = cartItem.quantity;
+        return {
+          ...product,
+          quantity,
+          total: product.price * quantity
+        };
+      }).filter(Boolean);
+
+      const subtotal = items.reduce((sum, item) => sum + item.total, 0);
+      const delivery = items.length ? 350 : 0;
+      const total = subtotal + delivery;
+
+      return { items, subtotal, delivery, total };
+    }
+
+    function updateCart() {
+      const cartCount = document.getElementById('cartCount');
+      const cartItems = document.getElementById('cartItems');
+      const subtotalValue = document.getElementById('subtotalValue');
+      const deliveryValue = document.getElementById('deliveryValue');
+      const totalValue = document.getElementById('totalValue');
+      const checkoutTotal = document.getElementById('checkoutTotal');
+      const checkoutSummary = document.getElementById('checkoutSummary');
+
+      const { items, subtotal, delivery, total } = getCartDetails();
+      const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
+
+      if (cartCount) cartCount.textContent = totalQty;
+
+      if (!cartItems) return;
+
+      if (!items.length) {
+        cartItems.innerHTML = `
+          <div class="flex h-full flex-col items-center justify-center rounded-[1.5rem] border border-dashed border-white/15 bg-[#111111] p-8 text-center">
+            <div class="mb-3 text-4xl">🛍️</div>
+            <p class="text-lg font-bold">Your cart is empty</p>
+            <p class="mt-2 text-sm text-white/55">Add a few fresh fits to continue.</p>
+          </div>
+        `;
+      } else {
+        cartItems.innerHTML = items.map(item => `
+          <div class="rounded-[1.5rem] border border-white/10 bg-[#111111] p-3">
+            <div class="flex gap-3">
+              <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-2xl object-cover" />
+              <div class="flex-1">
+                <div class="flex items-start justify-between gap-2">
+                  <div>
+                    <p class="text-sm font-bold text-white">${item.name}</p>
+                    <p class="mt-1 text-xs text-yellow-300">${money(item.price)}</p>
+                  </div>
+                  <button data-remove-item="${item.id}" class="text-xs text-red-400">Remove</button>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                  <div class="flex items-center gap-2 rounded-full border border-white/10 bg-black px-2 py-1">
+                    <button data-qty="decrease" data-id="${item.id}" class="text-lg leading-none">−</button>
+                    <span class="min-w-5 text-center text-sm font-bold">${item.quantity}</span>
+                    <button data-qty="increase" data-id="${item.id}" class="text-lg leading-none">＋</button>
+                  </div>
+                  <span class="font-black text-white">${money(item.total)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      if (subtotalValue) subtotalValue.textContent = money(subtotal);
+      if (deliveryValue) deliveryValue.textContent = money(delivery);
+      if (totalValue) totalValue.textContent = money(total);
+      if (checkoutTotal) checkoutTotal.textContent = money(total);
+
+      if (checkoutSummary) {
+        checkoutSummary.innerHTML = items.length ? items.map(item => `
+          <div class="flex items-center justify-between gap-3">
+            <span>${item.name} x${item.quantity}</span>
+            <span>${money(item.total)}</span>
+          </div>
+        `).join('') : '<p class="text-white/55">No items selected.</p>';
+      }
+
+      cartItems.querySelectorAll('[data-remove-item]').forEach(button => {
+        button.addEventListener('click', () => removeFromCart(Number(button.dataset.removeItem)));
+      });
+
+      cartItems.querySelectorAll('[data-qty]').forEach(button => {
+        const delta = button.dataset.qty === 'increase' ? 1 : -1;
+        button.addEventListener('click', () => changeCartQuantity(Number(button.dataset.id), delta));
+      });
+    }
+
+    function openCart() {
+      const cartDrawer = document.getElementById('cartDrawer');
+      if (cartDrawer) cartDrawer.classList.remove('hidden');
+    }
+
+    function closeCart() {
+      const cartDrawer = document.getElementById('cartDrawer');
+      if (cartDrawer) cartDrawer.classList.add('hidden');
+    }
+
+    function openCheckout() {
+      const { items } = getCartDetails();
+      if (!items.length) {
+        showToast('Your cart is empty');
+        return;
+      }
+      updateCart();
+      closeCart();
+      document.getElementById('checkoutDrawer').classList.remove('hidden');
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutDrawer').classList.add('hidden');
+    }
+
+    function openAdmin() {
+      document.getElementById('adminDrawer').classList.remove('hidden');
+      document.getElementById('brandInput').value = state.brand;
+    }
+
+    function closeAdmin() {
+      document.getElementById('adminDrawer').classList.add('hidden');
+    }
+
+    function saveBrand() {
+      const brandInput = document.getElementById('brandInput');
+      const logoInput = document.getElementById('logoInput');
+
+      if (brandInput.value.trim()) {
+        state.brand = brandInput.value.trim();
+        localStorage.setItem('shasan_brand', state.brand);
+      }
+
+      if (logoInput.files && logoInput.files[0]) {
+        const file = logoInput.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          state.logo = e.target.result;
+          localStorage.setItem('shasan_logo', state.logo);
+          renderBrand();
+          showToast('Brand updated');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        renderBrand();
+        showToast('Brand updated');
+      }
+    }
+
+    function formatProductImage(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        callback(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function addProductFromAdmin() {
+      const name = document.getElementById('productName').value.trim();
+      const price = Number(document.getElementById('productPrice').value);
+      const category = document.getElementById('productCategory').value;
+      const imageFile = document.getElementById('productImage').files[0];
+
+      if (!name || !price || !imageFile) {
+        showToast('Please enter product name, price, and image');
+        return;
+      }
+
+      formatProductImage(imageFile, (image) => {
+        const newProduct = {
+          id: Date.now(),
+          name,
+          price,
+          category,
+          image
+        };
+
+        state.products.unshift(newProduct);
+        saveProducts();
+        renderProducts();
+        renderCategoryFilters();
+        document.getElementById('productName').value = '';
+        document.getElementById('productPrice').value = '';
+        document.getElementById('productImage').value = '';
+        showToast('Product added successfully');
+      });
+    }
+
+    function renderAdminProducts() {
+      const list = document.getElementById('adminProductList');
+      if (!list) return;
+
+      list.innerHTML = state.products.map(product => `
+        <div class="flex items-center gap-3 rounded-[1.3rem] border border-white/10 bg-[#121212] p-3">
+          <img src="${product.image}" class="h-16 w-16 rounded-2xl object-cover" alt="${product.name}" />
+          <div class="flex-1 min-w-0">
+            <p class="truncate text-sm font-bold text-white">${product.name}</p>
+            <p class="text-xs text-yellow-300">${money(product.price)}</p>
+          </div>
+          <button data-admin-delete="${product.id}" class="rounded-full border border-red-500/40 px-3 py-1 text-xs font-bold text-red-400">Delete</button>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('[data-admin-delete]').forEach(button => {
+        button.addEventListener('click', () => {
+          const productId = Number(button.dataset.adminDelete);
+          state.products = state.products.filter(product => product.id !== productId);
+          state.cart = state.cart.filter(item => item.id !== productId);
+          saveProducts();
+          saveCart();
+          renderProducts();
+          renderAdminProducts();
+          updateCart();
+          showToast('Product removed');
+        });
+      });
+    }
+
+    function handleCheckoutSubmit(event) {
+      event.preventDefault();
+
+      const { items, total } = getCartDetails();
+      if (!items.length) {
+        showToast('Cart is empty');
+        return;
+      }
+
+      const fullName = document.getElementById('customerName').value.trim();
+      const phone = document.getElementById('customerPhone').value.trim();
+      const email = document.getElementById('customerEmail').value.trim();
+      const address = document.getElementById('customerAddress').value.trim();
+      const city = document.getElementById('customerCity').value.trim();
+      const payment = document.querySelector('input[name="payment"]:checked')?.value || 'Bank Transfer';
+      const notes = document.getElementById('customerNotes').value.trim();
+
+      if (!fullName || !phone || !address || !city) {
+        showToast('Please fill in all required fields');
+        return;
+      }
+
+      const itemsList = items.map(item => `- ${item.name} x${item.quantity} (${money(item.total)})`).join('\n');
+      const message = `Hello SHASAN DRIP CO,%0A%0AOrder from: ${encodeURIComponent(fullName)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}%0ACity: ${encodeURIComponent(city)}%0AAddress: ${encodeURIComponent(address)}%0APayment: ${encodeURIComponent(payment)}%0AOrder notes: ${encodeURIComponent(notes || 'None')}%0A%0AItems:%0A${encodeURIComponent(itemsList)}%0A%0ATotal: ${encodeURIComponent(money(total))}`;
+
+      state.cart = [];
+      saveCart();
+      updateCart();
+      closeCheckout();
+      showToast('Order sent to WhatsApp');
+      window.open(`https://wa.me/94778014156?text=${message}`, '_blank');
+      document.getElementById('checkoutForm').reset();
+    }
+
+    document.getElementById('cartToggle').addEventListener('click', openCart);
+    document.getElementById('cartBackdrop').addEventListener('click', closeCart);
+    document.getElementById('closeCart').addEventListener('click', closeCart);
+    document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
+    document.getElementById('checkoutBackdrop').addEventListener('click', closeCheckout);
+    document.getElementById('closeCheckout').addEventListener('click', closeCheckout);
+    document.getElementById('adminToggle').addEventListener('click', openAdmin);
+    document.getElementById('adminBackdrop').addEventListener('click', closeAdmin);
+    document.getElementById('closeAdmin').addEventListener('click', closeAdmin);
+    document.getElementById('saveBrandBtn').addEventListener('click', saveBrand);
+    document.getElementById('addProductBtn').addEventListener('click', addProductFromAdmin);
+    document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
+
+    document.getElementById('newsletterEmail').addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        showToast('Thanks for subscribing');
+        this.value = '';
+      }
+    });
+
+    renderBrand();
+    renderCategoryFilters();
+    renderProducts();
+    renderAdminProducts();
+    updateCart();
+  </script>
 </body>
 </html>
