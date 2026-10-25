@@ -111,9 +111,12 @@
           </div>
         </div>
 
-        <button id="cartToggle" class="relative gold-bg rounded-full px-3 py-2 text-xs font-black shadow-lg shadow-yellow-500/20">
-          🛒 <span id="cartCount" class="ml-1 rounded-full bg-black px-1.5 py-0.5 text-[9px] text-yellow-300">0</span>
-        </button>
+        <div class="flex items-center gap-2">
+          <button id="adminToggle" class="rounded-full border border-white/10 bg-white/5 px-2 py-2 text-xs font-black uppercase tracking-[0.12em] text-white">⚙</button>
+          <button id="cartToggle" class="relative gold-bg rounded-full px-3 py-2 text-xs font-black shadow-lg shadow-yellow-500/20">
+            🛒 <span id="cartCount" class="ml-1 rounded-full bg-black px-1.5 py-0.5 text-[9px] text-yellow-300">0</span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -420,6 +423,7 @@
 
     function showToast(message) {
       const toast = document.getElementById('toast');
+      if (!toast) return;
       toast.textContent = message;
       toast.classList.remove('hidden');
       clearTimeout(showToast.timer);
@@ -450,27 +454,6 @@
         }
         if (logoFallback) logoFallback.style.display = 'flex';
       }
-    }
-
-    function getCategories() { return ['all', ...new Set(state.products.map(p => p.category))]; }
-
-    function renderCategoryFilters() {
-      const filters = document.getElementById('categoryFilters');
-      if (!filters) return;
-
-      filters.innerHTML = getCategories().map(category => {
-        const label = category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1);
-        const active = state.activeCategory === category ? 'bg-yellow-400 text-black' : 'border border-white/10 bg-white/5 text-white';
-        return `<button data-category="${category}" class="rounded-full px-4 py-2 text-sm font-semibold ${active}">${label}</button>`;
-      }).join('');
-
-      filters.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', () => {
-          state.activeCategory = button.dataset.category;
-          renderCategoryFilters();
-          renderProducts();
-        });
-      });
     }
 
     function getVisibleProducts() {
@@ -564,6 +547,8 @@
       const detailPrice = document.getElementById('detailPrice');
       const detailDescription = document.getElementById('detailDescription');
 
+      if (!modal || !detailImage || !detailCategory || !detailName || !detailPrice || !detailDescription) return;
+
       detailImage.src = product.image;
       detailCategory.textContent = product.category;
       detailName.textContent = product.name;
@@ -571,8 +556,11 @@
       detailDescription.textContent = product.description || 'Premium boys streetwear designed with comfort, confidence, and everyday movement in mind.';
       modal.classList.remove('hidden');
 
-      document.getElementById('detailAddToCart').onclick = () => addToCart(productId);
-      document.getElementById('detailBuyNow').onclick = () => {
+      const addBtn = document.getElementById('detailAddToCart');
+      const buyBtn = document.getElementById('detailBuyNow');
+
+      if (addBtn) addBtn.onclick = () => addToCart(productId);
+      if (buyBtn) buyBtn.onclick = () => {
         addToCart(productId);
         openCart();
         closeProductDetail();
@@ -580,7 +568,8 @@
     }
 
     function closeProductDetail() {
-      document.getElementById('productDetailModal').classList.add('hidden');
+      const modal = document.getElementById('productDetailModal');
+      if (modal) modal.classList.add('hidden');
     }
 
     function addToCart(productId) {
@@ -727,32 +716,37 @@
       }
       updateCart();
       closeCart();
-      document.getElementById('checkoutDrawer').classList.remove('hidden');
+      const drawer = document.getElementById('checkoutDrawer');
+      if (drawer) drawer.classList.remove('hidden');
     }
 
     function closeCheckout() {
-      document.getElementById('checkoutDrawer').classList.add('hidden');
+      const drawer = document.getElementById('checkoutDrawer');
+      if (drawer) drawer.classList.add('hidden');
     }
 
     function openAdmin() {
-      document.getElementById('adminDrawer').classList.remove('hidden');
-      document.getElementById('brandInput').value = state.brand;
+      const drawer = document.getElementById('adminDrawer');
+      if (drawer) drawer.classList.remove('hidden');
+      const brandInput = document.getElementById('brandInput');
+      if (brandInput) brandInput.value = state.brand;
     }
 
     function closeAdmin() {
-      document.getElementById('adminDrawer').classList.add('hidden');
+      const drawer = document.getElementById('adminDrawer');
+      if (drawer) drawer.classList.add('hidden');
     }
 
     function saveBrand() {
       const brandInput = document.getElementById('brandInput');
       const logoInput = document.getElementById('logoInput');
 
-      if (brandInput.value.trim()) {
+      if (brandInput && brandInput.value.trim()) {
         state.brand = brandInput.value.trim();
         localStorage.setItem('shasan_brand', state.brand);
       }
 
-      if (logoInput.files && logoInput.files[0]) {
+      if (logoInput && logoInput.files && logoInput.files[0]) {
         const file = logoInput.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -800,7 +794,7 @@
         state.products.unshift(newProduct);
         saveProducts();
         renderProducts();
-        renderCategoryFilters();
+        renderAdminProducts();
         document.getElementById('productName').value = '';
         document.getElementById('productPrice').value = '';
         document.getElementById('productImage').value = '';
@@ -872,31 +866,55 @@
       document.getElementById('checkoutForm').reset();
     }
 
-    document.getElementById('cartToggle').addEventListener('click', openCart);
-    document.getElementById('heroCart').addEventListener('click', openCart);
-    document.getElementById('cartBackdrop').addEventListener('click', closeCart);
-    document.getElementById('closeCart').addEventListener('click', closeCart);
-    document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
-    document.getElementById('checkoutBackdrop').addEventListener('click', closeCheckout);
-    document.getElementById('closeCheckout').addEventListener('click', closeCheckout);
-    document.getElementById('adminToggle').addEventListener('click', openAdmin);
-    document.getElementById('adminBackdrop').addEventListener('click', closeAdmin);
-    document.getElementById('closeAdmin').addEventListener('click', closeAdmin);
-    document.getElementById('saveBrandBtn').addEventListener('click', saveBrand);
-    document.getElementById('addProductBtn').addEventListener('click', addProductFromAdmin);
-    document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
-    document.getElementById('productModalBackdrop').addEventListener('click', closeProductDetail);
-    document.getElementById('closeProductDetail').addEventListener('click', closeProductDetail);
-    document.getElementById('sortSelect').addEventListener('change', function () {
+    const cartToggle = document.getElementById('cartToggle');
+    if (cartToggle) cartToggle.addEventListener('click', openCart);
+
+    const heroCart = document.getElementById('heroCart');
+    if (heroCart) heroCart.addEventListener('click', openCart);
+
+    const cartBackdrop = document.getElementById('cartBackdrop');
+    if (cartBackdrop) cartBackdrop.addEventListener('click', closeCart);
+
+    const closeCartBtn = document.getElementById('closeCart');
+    if (closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) checkoutBtn.addEventListener('click', openCheckout);
+
+    const checkoutBackdrop = document.getElementById('checkoutBackdrop');
+    if (checkoutBackdrop) checkoutBackdrop.addEventListener('click', closeCheckout);
+
+    const closeCheckoutBtn = document.getElementById('closeCheckout');
+    if (closeCheckoutBtn) closeCheckoutBtn.addEventListener('click', closeCheckout);
+
+    const adminToggle = document.getElementById('adminToggle');
+    if (adminToggle) adminToggle.addEventListener('click', openAdmin);
+
+    const adminBackdrop = document.getElementById('adminBackdrop');
+    if (adminBackdrop) adminBackdrop.addEventListener('click', closeAdmin);
+
+    const closeAdminBtn = document.getElementById('closeAdmin');
+    if (closeAdminBtn) closeAdminBtn.addEventListener('click', closeAdmin);
+
+    const saveBrandBtn = document.getElementById('saveBrandBtn');
+    if (saveBrandBtn) saveBrandBtn.addEventListener('click', saveBrand);
+
+    const addProductBtn = document.getElementById('addProductBtn');
+    if (addProductBtn) addProductBtn.addEventListener('click', addProductFromAdmin);
+
+    const checkoutForm = document.getElementById('checkoutForm');
+    if (checkoutForm) checkoutForm.addEventListener('submit', handleCheckoutSubmit);
+
+    const productModalBackdrop = document.getElementById('productModalBackdrop');
+    if (productModalBackdrop) productModalBackdrop.addEventListener('click', closeProductDetail);
+
+    const closeProductDetailBtn = document.getElementById('closeProductDetail');
+    if (closeProductDetailBtn) closeProductDetailBtn.addEventListener('click', closeProductDetail);
+
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) sortSelect.addEventListener('change', function () {
       state.sortBy = this.value;
       renderProducts();
-    });
-
-    document.getElementById('newsletterEmail')?.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        showToast('Thanks for subscribing');
-        this.value = '';
-      }
     });
 
     renderBrand();
