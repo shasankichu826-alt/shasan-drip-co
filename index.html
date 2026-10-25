@@ -17,203 +17,732 @@
   <style>
     :root {
       --bg: #0b0b0b;
-      --bg-2: #15110d;
-      --panel: #111111;
-      --panel-2: #171717;
+      --bg-soft: #121212;
+      --panel: #181818;
+      --panel-2: #1f1f1f;
       --text: #f7f3ee;
       --muted: #cfc4b8;
       --gold: #f5d76e;
       --gold-2: #d4af37;
-      --soft: #f5f0ea;
-      --soft-2: #e9dfd1;
+      --cream: #f4efe9;
       --brown: #2a2019;
-      --card: rgba(255,255,255,0.03);
       --stroke: rgba(255,255,255,0.08);
-      --brand-ink: #120d09;
-      --brand-terracotta: #b76d3a;
-      --brand-gold: #f5d36b;
-      --brand-cream: #f7f4ee;
+      --soft: rgba(255,255,255,0.04);
+      --shadow: rgba(0,0,0,0.38);
     }
 
+    * { box-sizing: border-box; }
+
     html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(245, 215, 110, 0.08), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(183, 109, 58, 0.08), transparent 30%),
+        radial-gradient(circle at top left, rgba(245,215,110,0.10), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(183,109,58,0.10), transparent 30%),
         var(--bg);
       color: var(--text);
       line-height: 1.5;
       min-height: 100vh;
+      margin: 0;
     }
+
     .app-shell {
       max-width: 430px;
       margin: 0 auto;
-      background: #0d0d0d;
       min-height: 100vh;
+      background: linear-gradient(180deg, #0d0d0d 0%, #0b0b0b 100%);
       position: relative;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.48);
     }
-    .bebas { font-family: 'Bebas Neue', sans-serif; }
+
+    .bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+
     .gold { color: var(--gold); }
+
     .gold-bg {
       background: linear-gradient(135deg, var(--gold), var(--gold-2));
       color: #111;
     }
-    .soft-bg { background: var(--soft); }
-    .glass {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+
     .section-shell {
-      max-width: 100%;
+      width: min(100%, 100%);
       margin: 0 auto;
       padding-left: 1rem;
       padding-right: 1rem;
     }
-    .product-card img { transition: transform 0.35s ease; }
-    .product-card:hover img { transform: scale(1.05); }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    img {
-      content-visibility: auto;
-      loading: lazy;
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(10,10,10,0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--stroke);
     }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-width: 0;
+    }
+
+    .logo-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 9999px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #f7d778, #d9a743 55%, #7b4f2d 100%);
+      border: 1px solid rgba(245, 215, 110, 0.4);
+      box-shadow: 0 8px 20px rgba(245,215,110,0.12);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    #logoImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .logo-fallback {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #120d09;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .brand-text p {
+      margin: 0.15rem 0 0;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.52);
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .icon-btn {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      border-radius: 9999px;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .cart-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.68rem 0.9rem;
+      border-radius: 9999px;
+      box-shadow: 0 10px 24px rgba(245,215,110,0.18);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cart-pill {
+      border-radius: 9999px;
+      background: rgba(0,0,0,0.8);
+      color: var(--gold);
+      min-width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 0.58rem;
+      padding: 0 0.28rem;
+    }
+
+    main {
+      padding-bottom: 5.5rem;
+    }
+
+    .hero-panel {
+      padding-top: 1rem;
+      padding-bottom: 0.75rem;
+    }
+
+    .hero-card {
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(18,18,18,0.96), rgba(16,16,16,0.96));
+      border-radius: 1.6rem;
+      padding: 0.9rem;
+      box-shadow: 0 22px 42px rgba(0,0,0,0.25);
+    }
+
+    .hero-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .eyebrow {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    .free-pill {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.7);
+      border-radius: 9999px;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.56rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 245px;
+      object-fit: cover;
+      border-radius: 1.2rem;
+      display: block;
+    }
+
+    .hero-copy {
+      margin-top: 0.9rem;
+    }
+
+    .hero-copy .small-label {
+      display: block;
+      color: rgba(255,255,255,0.52);
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.56rem;
+    }
+
+    .hero-title {
+      margin: 0.5rem 0 0;
+      font-size: clamp(2.1rem, 9vw, 3.2rem);
+      line-height: 0.9;
+      color: var(--text);
+    }
+
+    .hero-title .gold {
+      color: var(--gold);
+    }
+
+    .hero-copy p {
+      margin: 0.7rem 0 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.86rem;
+    }
+
+    .hero-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .cta-primary, .cta-secondary {
+      flex: 1;
+      border-radius: 9999px;
+      padding: 0.9rem 1rem;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.62rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: #111;
+      box-shadow: 0 14px 30px rgba(245,215,110,0.18);
+    }
+
+    .cta-secondary {
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .trust-strip {
+      padding: 0.2rem 0 0.8rem;
+    }
+
+    .trust-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .trust-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 1.1rem;
+      padding: 0.8rem 0.6rem;
+      text-align: center;
+    }
+
+    .trust-item .icon {
+      font-size: 1rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .trust-item strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.7rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .trust-item span {
+      color: rgba(255,255,255,0.56);
+      font-size: 0.56rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .chip-row {
+      padding: 0.2rem 0 0.8rem;
+    }
+
+    .chip-list {
+      display: flex;
+      gap: 0.55rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 0.2rem;
+    }
+
+    .chip-list::-webkit-scrollbar { display: none; }
+
+    .chip {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      padding: 0.7rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .chip.active {
+      background: linear-gradient(135deg, rgba(245,215,110,0.12), rgba(212,175,55,0.18));
+      border-color: rgba(245,215,110,0.38);
+      color: var(--gold);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      font-size: clamp(1.8rem, 5vw, 2.5rem);
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .see-all {
+      font-size: 0.56rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .section-block {
+      padding-top: 0.5rem;
+      padding-bottom: 0.8rem;
+    }
+
+    #featuredProducts,
+    #productGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .product-card {
+      background: linear-gradient(180deg, rgba(17,17,17,0.98), rgba(13,13,13,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 16px 26px rgba(0,0,0,0.16);
+    }
+
+    .product-card .image-wrap {
+      overflow: hidden;
+      background: #111;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .product-card:hover img { transform: scale(1.04); }
+
+    .product-info {
+      padding: 0.7rem 0.7rem 0.8rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .product-tag {
+      background: rgba(245,215,110,0.1);
+      border: 1px solid rgba(245,215,110,0.24);
+      color: var(--gold);
+      border-radius: 9999px;
+      padding: 0.25rem 0.45rem;
+      font-size: 0.48rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .product-price {
+      color: var(--text);
+      font-weight: 800;
+      font-size: 0.72rem;
+    }
+
+    .product-name {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .product-btn {
+      margin-top: 0.7rem;
+      width: 100%;
+      border: none;
+      border-radius: 9999px;
+      padding: 0.7rem 0.7rem;
+      font-size: 0.58rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .feature-banner {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(245,215,110,0.08), rgba(183,109,58,0.05));
+      border-radius: 1.5rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .feature-banner h4 {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.05;
+    }
+
+    .feature-banner p {
+      margin: 0;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.78rem;
+    }
+
+    .review-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.2rem;
+      padding: 0.9rem;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+    }
+
+    .review-box p {
+      margin: 0.6rem 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 0.82rem;
+    }
+
     .bottom-nav {
       position: sticky;
       bottom: 0;
       z-index: 30;
-      backdrop-filter: blur(18px);
-      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(16px);
+      background: rgba(14,14,14,0.9);
       border-top: 1px solid rgba(255,255,255,0.08);
     }
-    .hero-image {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 1.5rem;
+
+    .bottom-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.6rem 0.75rem;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.56rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-item.active { color: var(--gold); }
+
+    .nav-item span:first-child {
+      font-size: 1rem;
+    }
+
+    @media (max-width: 360px) {
+      .hero-image { height: 210px; }
+      .hero-title { font-size: 2.4rem; }
+      .trust-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="app-shell">
-    <header class="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-      <div class="section-shell flex items-center justify-between py-3 gap-3">
-        <div class="flex items-center gap-2 min-w-0">
-          <div id="logoBox" class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212] shadow-lg shadow-yellow-500/10">
-            <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" loading="eager" decoding="async" />
-            <span id="logoFallback" class="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_30%,#f7d778,#d8a83d_55%,#7a4e26_100%)] text-xl font-black text-[#120d09]">S</span>
+    <header>
+      <div class="header-inner">
+        <div class="brand-wrap">
+          <div id="logoBox" class="logo-box">
+            <img id="logoImg" src="" alt="Brand logo" />
+            <span id="logoFallback" class="logo-fallback">S</span>
           </div>
-          <div class="min-w-0">
-            <h1 id="brandName" class="bebas text-xl tracking-[0.1em] text-yellow-300 leading-none">SHASAN</h1>
-            <p class="text-[8px] uppercase tracking-[0.2em] text-white/50">DRIP CO</p>
+
+          <div class="brand-text">
+            <h1 id="brandName" class="bebas">SHASAN</h1>
+            <p>DRIP CO</p>
           </div>
         </div>
 
-        <div class="flex items-center gap-2">
-          <button id="adminToggle" class="rounded-full border border-white/10 bg-white/5 px-2 py-2 text-xs font-black uppercase tracking-[0.12em] text-white">⚙</button>
-          <button id="cartToggle" class="relative gold-bg rounded-full px-3 py-2 text-xs font-black shadow-lg shadow-yellow-500/20">
-            🛒 <span id="cartCount" class="ml-1 rounded-full bg-black px-1.5 py-0.5 text-[9px] text-yellow-300">0</span>
+        <div class="top-actions">
+          <button id="adminToggle" class="icon-btn" aria-label="Admin settings">⚙</button>
+          <button id="cartToggle" class="cart-btn gold-bg" aria-label="Open cart">
+            🛒
+            <span id="cartCount" class="cart-pill">0</span>
           </button>
         </div>
       </div>
     </header>
 
-    <main class="pb-24">
-      <section id="home" class="section-shell pt-4 pb-3">
-        <div class="rounded-[1.7rem] border border-white/10 bg-[#121212] p-3 shadow-lg shadow-black/20">
-          <div class="mb-3 flex items-center justify-between">
-            <p class="text-[9px] font-bold uppercase tracking-[0.35em] text-yellow-300">New Drop</p>
-            <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[8px] text-white/70">Free delivery</span>
+    <main>
+      <section id="home" class="section-shell hero-panel">
+        <div class="hero-card">
+          <div class="hero-topbar">
+            <span class="eyebrow">New Drop</span>
+            <span class="free-pill">Free delivery</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-2">
-            <div class="overflow-hidden rounded-[1.2rem]">
-              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Boy wearing modern outfit" class="hero-image" loading="eager" decoding="async" />
-            </div>
-            <div class="overflow-hidden rounded-[1.2rem]">
-              <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Boy fashion portrait" class="hero-image" loading="eager" decoding="async" />
-            </div>
+          <div class="hero-grid">
+            <img
+              src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80"
+              alt="Streetwear outfit"
+              class="hero-image"
+            />
+            <img
+              src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80"
+              alt="Streetwear portrait"
+              class="hero-image"
+            />
           </div>
 
-          <div class="mt-4">
-            <p class="text-[10px] uppercase tracking-[0.25em] text-white/45">Premium boys streetwear</p>
-            <h2 class="mt-2 bebas text-4xl leading-none text-white">
+          <div class="hero-copy">
+            <span class="small-label">Premium boys streetwear</span>
+            <h2 class="hero-title">
               DRIP <span class="gold">SMART</span>
             </h2>
-            <p class="mt-2 text-sm text-white/65">Clean fits. Bold looks. Everyday confidence.</p>
-            <div class="mt-4 flex gap-2">
-              <a href="#shop" class="gold-bg flex-1 rounded-full px-4 py-3 text-center text-[10px] font-black uppercase tracking-[0.15em]">Shop now</a>
-              <button id="heroCart" class="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-[10px] font-black uppercase tracking-[0.15em] text-white">Cart</button>
+            <p>Clean fits. Bold looks. Everyday confidence.</p>
+
+            <div class="hero-actions">
+              <a href="#shop" class="cta-primary">Shop now</a>
+              <button id="heroCart" class="cta-secondary">Cart</button>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="section-shell py-2">
-        <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
-          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">All</button>
-          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Streetwear</button>
-          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Essentials</button>
-          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Urban</button>
+      <section class="section-shell trust-strip">
+        <div class="trust-row">
+          <div class="trust-item">
+            <span class="icon">⚡</span>
+            <strong>Fast</strong>
+            <span>Dispatch</span>
+          </div>
+          <div class="trust-item">
+            <span class="icon">⭐</span>
+            <strong>Premium</strong>
+            <span>Quality</span>
+          </div>
+          <div class="trust-item">
+            <span class="icon">📍</span>
+            <strong>Island</strong>
+            <span>Delivery</span>
+          </div>
         </div>
       </section>
 
-      <section id="collections" class="section-shell py-4">
-        <div class="mb-3 flex items-center justify-between">
-          <h3 class="bebas text-3xl text-white">Popular picks</h3>
-          <a href="#shop" class="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-300">See all</a>
+      <section class="section-shell chip-row">
+        <div class="chip-list">
+          <button class="chip active">All</button>
+          <button class="chip">Streetwear</button>
+          <button class="chip">Essentials</button>
+          <button class="chip">Urban</button>
+          <button class="chip">Gift</button>
         </div>
-        <div id="featuredProducts" class="grid grid-cols-2 gap-3"></div>
       </section>
 
-      <section id="shop" class="section-shell py-4">
-        <div class="mb-3 flex items-center justify-between">
-          <h3 class="bebas text-3xl text-white">Shop</h3>
-          <select id="sortSelect" class="rounded-full border border-white/10 bg-[#1b1b1b] px-2 py-2 text-[10px] text-white focus:outline-none">
+      <section id="collections" class="section-shell section-block">
+        <div class="section-heading">
+          <h3 class="bebas">Popular picks</h3>
+          <a href="#shop" class="see-all">See all</a>
+        </div>
+        <div id="featuredProducts"></div>
+      </section>
+
+      <section class="section-shell section-block">
+        <div class="feature-banner">
+          <span class="eyebrow" style="color: var(--gold);">Why choose us</span>
+          <h4 class="bebas">Built for comfort, confidence, and impact.</h4>
+          <p>Premium-quality boys streetwear made for school, street, and everyday style.</p>
+        </div>
+      </section>
+
+      <section id="shop" class="section-shell section-block">
+        <div class="section-heading">
+          <h3 class="bebas">Shop</h3>
+          <select id="sortSelect" style="border:1px solid rgba(255,255,255,0.08); background: #1b1b1b; color: #fff; border-radius: 9999px; padding: 0.7rem 0.9rem; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em;">
             <option value="featured">Featured</option>
             <option value="low-high">Low to high</option>
             <option value="high-low">High to low</option>
             <option value="name">Name</option>
           </select>
         </div>
-        <div id="productGrid" class="grid grid-cols-2 gap-3"></div>
+        <div id="productGrid"></div>
       </section>
 
-      <section id="reviews" class="section-shell py-5">
-        <div class="mb-3">
-          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Reviews</p>
-          <h3 class="mt-1 bebas text-3xl text-white">Loved by parents</h3>
+      <section id="reviews" class="section-shell section-block">
+        <div class="section-heading" style="margin-bottom: 0.9rem;">
+          <h3 class="bebas">Loved by parents</h3>
         </div>
-        <div class="space-y-3">
-          <div class="rounded-[1.4rem] border border-white/10 bg-white/5 p-3">
-            <div class="mb-2 text-yellow-400 text-xs">★★★★★</div>
-            <p class="text-sm text-white/80">“Perfect fit and premium feel.”</p>
+
+        <div style="display: grid; gap: 0.75rem;">
+          <div class="review-box">
+            <div class="review-stars">★★★★★</div>
+            <p>“Perfect fit and premium feel. My son wears it every weekend.”</p>
           </div>
-          <div class="rounded-[1.4rem] border border-white/10 bg-white/5 p-3">
-            <div class="mb-2 text-yellow-400 text-xs">★★★★★</div>
-            <p class="text-sm text-white/80">“My son loved the outfit instantly.”</p>
+
+          <div class="review-box">
+            <div class="review-stars">★★★★★</div>
+            <p>“The quality looks expensive and the delivery was super smooth.”</p>
+          </div>
+
+          <div class="review-box">
+            <div class="review-stars">★★★★★</div>
+            <p>“Simple, stylish, and comfortable. Exactly what we wanted.”</p>
           </div>
         </div>
       </section>
     </main>
 
     <nav class="bottom-nav">
-      <div class="section-shell flex items-center justify-between py-2">
-        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+      <div class="bottom-nav-inner">
+        <button class="nav-item active">
           <span>🏠</span>
           <span>Home</span>
         </button>
-        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+        <button class="nav-item">
           <span>🧥</span>
           <span>Shop</span>
         </button>
-        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+        <button class="nav-item">
           <span>🛒</span>
           <span>Cart</span>
         </button>
-        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+        <button class="nav-item">
           <span>👤</span>
           <span>Profile</span>
         </button>
@@ -261,27 +790,27 @@
         <div class="grid gap-4 md:grid-cols-2">
           <div>
             <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Full name</label>
-            <input id="customerName" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Your name" />
+            <input id="customerName" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
           </div>
           <div>
             <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Phone number</label>
-            <input id="customerPhone" type="tel" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="077xxxxxxx" />
+            <input id="customerPhone" type="tel" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
           </div>
         </div>
 
         <div>
           <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Email</label>
-          <input id="customerEmail" type="email" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="name@example.com" />
+          <input id="customerEmail" type="email" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
         </div>
 
         <div>
           <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Delivery address</label>
-          <textarea id="customerAddress" rows="3" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Street, town, city"></textarea>
+          <textarea id="customerAddress" rows="3" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none"></textarea>
         </div>
 
         <div>
           <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Delivery city</label>
-          <input id="customerCity" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Colombo, Trincomalee, etc." />
+          <input id="customerCity" type="text" required class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" />
         </div>
 
         <div>
@@ -309,7 +838,7 @@
 
         <div>
           <label class="mb-2 block text-xs font-bold uppercase tracking-[0.2em] text-white/50">Order notes</label>
-          <textarea id="customerNotes" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none" placeholder="Optional notes"></textarea>
+          <textarea id="customerNotes" rows="3" class="w-full rounded-2xl border border-white/10 bg-[#121212] px-4 py-3 text-white placeholder:text-white/35 focus:border-yellow-400/60 focus:outline-none"></textarea>
         </div>
 
         <button type="submit" class="gold-bg w-full rounded-full px-5 py-3 font-black uppercase tracking-[0.15em]">Place order</button>
@@ -379,9 +908,7 @@
           </div>
           <h4 id="detailName" class="bebas text-4xl text-white">Product Name</h4>
           <p id="detailPrice" class="mt-4 text-3xl font-black text-yellow-300">LKR 0</p>
-          <p id="detailDescription" class="mt-5 text-white/70">
-            Premium boys streetwear designed with comfort, confidence, and everyday movement in mind.
-          </p>
+          <p id="detailDescription" class="mt-5 text-white/70">Premium boys streetwear designed with comfort, confidence, and everyday movement in mind.</p>
           <div class="mt-6 flex items-center gap-3">
             <button id="detailAddToCart" class="gold-bg rounded-full px-5 py-3 text-sm font-black uppercase tracking-[0.15em]">Add to cart</button>
             <button id="detailBuyNow" class="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-black uppercase tracking-[0.15em] text-white">Buy now</button>
@@ -395,14 +922,14 @@
 
   <script>
     const defaultProducts = [
-      { id: 1, name: 'Urban Street Hoodie', price: 4990, category: 'streetwear', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80', description: 'A premium oversized hoodie built for comfort and modern street energy.' },
-      { id: 2, name: 'Signature Tee Gold', price: 2990, category: 'essentials', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80', description: 'Classic everyday tee with a crisp, sharp print and a lightweight feel.' },
-      { id: 3, name: 'Classic Oversized Set', price: 5490, category: 'urban', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&q=80', description: 'A standout urban outfit that balances style, ease, and confidence.' },
-      { id: 4, name: 'Minimal Street Fit', price: 4590, category: 'streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80', description: 'Minimal, sharp, and sporty for all-day wear and easy styling.' },
-      { id: 5, name: 'Premium School Tee', price: 2890, category: 'essentials', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80', description: 'Comfort-focused tee with clean detailing and a modern fit for school or hangouts.' },
-      { id: 6, name: 'Gold Print Hoodie', price: 5990, category: 'urban', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=80', description: 'Bold branding and premium cotton feel for a confident statement look.' },
-      { id: 7, name: 'Weekend Casual Set', price: 5190, category: 'streetwear', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=700&q=80', description: 'Relaxed fit with elevated styling, ideal for everyday comfort and looks.' },
-      { id: 8, name: 'Gift Combo Pack', price: 6400, category: 'gift', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80', description: 'A curated set designed for gifting with personality and premium finish.' }
+      { id: 1, name: 'Urban Street Hoodie', price: 4990, category: 'streetwear', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80', description: 'Premium cotton hoodie made for everyday movement and bold street energy.' },
+      { id: 2, name: 'Signature Tee Gold', price: 2990, category: 'essentials', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80', description: 'A soft everyday tee with a clean streetwear finish and premium comfort.' },
+      { id: 3, name: 'Classic Oversized Set', price: 5490, category: 'urban', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&q=80', description: 'Comfort-first oversized fit designed for smart, elevated casual looks.' },
+      { id: 4, name: 'Minimal Street Fit', price: 4590, category: 'streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80', description: 'Simple, modern layering essentials for confident everyday wear.' },
+      { id: 5, name: 'Premium School Tee', price: 2890, category: 'essentials', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80', description: 'Lightweight and durable, ideal for comfort all day long.' },
+      { id: 6, name: 'Gold Print Hoodie', price: 5990, category: 'urban', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=80', description: 'Bold statement hoodie crafted for standout city style and all-day comfort.' },
+      { id: 7, name: 'Weekend Casual Set', price: 5190, category: 'streetwear', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=700&q=80', description: 'Trend-focused casual pieces built for relaxed movement and premium style.' },
+      { id: 8, name: 'Gift Combo Pack', price: 6400, category: 'gift', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80', description: 'A curated combo set designed as a stylish and thoughtful gift option.' }
     ];
 
     const state = {
@@ -444,13 +971,13 @@
       if (state.logo) {
         if (logoImg) {
           logoImg.src = state.logo;
-          logoImg.classList.remove('hidden');
+          logoImg.style.display = 'block';
         }
         if (logoFallback) logoFallback.style.display = 'none';
       } else {
         if (logoImg) {
           logoImg.src = '';
-          logoImg.classList.add('hidden');
+          logoImg.style.display = 'none';
         }
         if (logoFallback) logoFallback.style.display = 'flex';
       }
@@ -487,16 +1014,17 @@
       if (!grid || !featured) return;
 
       featured.innerHTML = featuredList.map(product => `
-        <article class="product-card overflow-hidden rounded-[1.2rem] border border-white/10 bg-[#111111]">
-          <div class="overflow-hidden">
-            <img src="${product.image}" alt="${product.name}" class="h-36 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
+        <article class="product-card">
+          <div class="image-wrap">
+            <img src="${product.image}" alt="${product.name}" data-view-product="${product.id}" loading="lazy" decoding="async" />
           </div>
-          <div class="p-2">
-            <div class="mb-1">
-              <p class="text-[10px] text-yellow-300">${money(product.price)}</p>
-              <h4 class="text-xs font-black text-white">${product.name}</h4>
+          <div class="product-info">
+            <div class="price-row">
+              <span class="product-tag">${product.category}</span>
+              <span class="product-price">${money(product.price)}</span>
             </div>
-            <button data-add-product="${product.id}" class="w-full rounded-full bg-white px-3 py-2 text-[9px] font-black uppercase tracking-[0.12em] text-black">Add</button>
+            <h4 class="product-name">${product.name}</h4>
+            <button data-add-product="${product.id}" class="product-btn gold-bg">Add</button>
           </div>
         </article>
       `).join('');
@@ -510,17 +1038,17 @@
         `;
       } else {
         grid.innerHTML = visible.map(product => `
-          <article class="product-card overflow-hidden rounded-[1.2rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
-            <div class="overflow-hidden">
-              <img src="${product.image}" alt="${product.name}" class="h-36 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
+          <article class="product-card">
+            <div class="image-wrap">
+              <img src="${product.image}" alt="${product.name}" data-view-product="${product.id}" loading="lazy" decoding="async" />
             </div>
-            <div class="p-2">
-              <div class="mb-1 flex items-center justify-between gap-2">
-                <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-yellow-300">${product.category}</span>
-                <span class="text-[10px] font-black text-white">${money(product.price)}</span>
+            <div class="product-info">
+              <div class="price-row">
+                <span class="product-tag">${product.category}</span>
+                <span class="product-price">${money(product.price)}</span>
               </div>
-              <h4 class="mb-2 text-xs font-black text-white">${product.name}</h4>
-              <button data-add-product="${product.id}" class="gold-bg w-full rounded-full px-3 py-2 text-[9px] font-black uppercase tracking-[0.12em]">Add</button>
+              <h4 class="product-name">${product.name}</h4>
+              <button data-add-product="${product.id}" class="product-btn gold-bg">Add</button>
             </div>
           </article>
         `).join('');
@@ -855,7 +1383,7 @@
       }
 
       const itemsList = items.map(item => `- ${item.name} x${item.quantity} (${money(item.total)})`).join('\n');
-      const message = `Hello SHASAN DRIP CO,%0A%0AOrder from: ${encodeURIComponent(fullName)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}%0ACity: ${encodeURIComponent(city)}%0AAddress: ${encodeURIComponent(address)}%0APayment: ${encodeURIComponent(payment)}%0AOrder notes: ${encodeURIComponent(notes || 'None')}%0A%0AItems:%0A${encodeURIComponent(itemsList)}%0A%0ATotal: ${encodeURIComponent(money(total))}`;
+      const message = `Hello SHASAN DRIP CO,%0A%0AOrder from: ${encodeURIComponent(fullName)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}%0ACity: ${encodeURIComponent(city)}%0ADelivery Address: ${encodeURIComponent(address)}%0APayment: ${encodeURIComponent(payment)}%0ANotes: ${encodeURIComponent(notes || 'None')}%0A%0AItems:%0A${encodeURIComponent(itemsList)}%0A%0ATotal: ${encodeURIComponent(money(total))}`;
 
       state.cart = [];
       saveCart();
