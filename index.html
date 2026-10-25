@@ -6,6 +6,10 @@
   <title>SHASAN DRIP CO</title>
   <meta name="description" content="Shasan Drip Co - premium boys streetwear, modern outfits, island-wide delivery." />
   <meta name="theme-color" content="#0b0b0b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -34,12 +38,21 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background: 
+      background:
         radial-gradient(circle at top left, rgba(245, 215, 110, 0.08), transparent 30%),
         radial-gradient(circle at bottom right, rgba(183, 109, 58, 0.08), transparent 30%),
         var(--bg);
       color: var(--text);
       line-height: 1.5;
+      min-height: 100vh;
+    }
+    .app-shell {
+      max-width: 430px;
+      margin: 0 auto;
+      background: #0d0d0d;
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.45);
     }
     .bebas { font-family: 'Bebas Neue', sans-serif; }
     .gold { color: var(--gold); }
@@ -54,10 +67,10 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
     .section-shell {
-      max-width: 1280px;
+      max-width: 100%;
       margin: 0 auto;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .product-card img { transition: transform 0.35s ease; }
     .product-card:hover img { transform: scale(1.05); }
@@ -67,236 +80,143 @@
       content-visibility: auto;
       loading: lazy;
     }
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(14,14,14,0.92);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero-image {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 1.5rem;
+    }
   </style>
 </head>
 <body>
-  <header class="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-    <div class="section-shell flex items-center justify-between py-4 gap-4">
-      <div class="flex items-center gap-3 min-w-0">
-        <div id="logoBox" class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212] shadow-lg shadow-yellow-500/10">
-          <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" loading="eager" decoding="async" />
-          <span id="logoFallback" class="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_30%,#f7d778,#d8a83d_55%,#7a4e26_100%)] text-2xl font-black text-[#120d09]">S</span>
+  <div class="app-shell">
+    <header class="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
+      <div class="section-shell flex items-center justify-between py-3 gap-3">
+        <div class="flex items-center gap-2 min-w-0">
+          <div id="logoBox" class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212] shadow-lg shadow-yellow-500/10">
+            <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" loading="eager" decoding="async" />
+            <span id="logoFallback" class="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_30%,#f7d778,#d8a83d_55%,#7a4e26_100%)] text-xl font-black text-[#120d09]">S</span>
+          </div>
+          <div class="min-w-0">
+            <h1 id="brandName" class="bebas text-xl tracking-[0.1em] text-yellow-300 leading-none">SHASAN</h1>
+            <p class="text-[8px] uppercase tracking-[0.2em] text-white/50">DRIP CO</p>
+          </div>
         </div>
-        <div class="min-w-0">
-          <h1 id="brandName" class="bebas text-2xl tracking-[0.12em] text-yellow-300 leading-none sm:text-3xl">SHASAN DRIP CO</h1>
-          <p class="text-[10px] uppercase tracking-[0.28em] text-white/40">Trincomalee • since 2024</p>
-        </div>
-      </div>
 
-      <div class="hidden flex-1 max-w-md items-center justify-center md:flex">
-        <div class="flex w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2">
-          <span class="text-lg">🔎</span>
-          <input id="searchInput" type="text" placeholder="Search outfits..." class="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none" />
-        </div>
-      </div>
-
-      <nav class="hidden items-center gap-7 text-sm font-medium text-white/75 md:flex">
-        <a href="#home" class="transition hover:text-white">Home</a>
-        <a href="#shop" class="transition hover:text-white">Shop</a>
-        <a href="#collections" class="transition hover:text-white">Collections</a>
-        <a href="#reviews" class="transition hover:text-white">Reviews</a>
-        <a href="#contact" class="transition hover:text-white">Contact</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <button id="adminToggle" class="hidden rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-white md:inline-flex">
-          Edit Shop
-        </button>
-        <button id="cartToggle" class="relative gold-bg rounded-full px-4 py-2 text-sm font-black shadow-lg shadow-yellow-500/20">
-          🛒 Cart <span id="cartCount" class="ml-2 rounded-full bg-black px-2 py-0.5 text-[10px] text-yellow-300">0</span>
+        <button id="cartToggle" class="relative gold-bg rounded-full px-3 py-2 text-xs font-black shadow-lg shadow-yellow-500/20">
+          🛒 <span id="cartCount" class="ml-1 rounded-full bg-black px-1.5 py-0.5 text-[9px] text-yellow-300">0</span>
         </button>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section id="home" class="section-shell py-16 md:py-20">
-      <div class="grid items-center gap-10 md:grid-cols-2">
-        <div>
-          <p class="mb-5 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.38em] text-yellow-300">
-            premium boys streetwear
-          </p>
-          <h2 class="bebas text-6xl leading-none text-white md:text-8xl">
-            Dress bold.<br />
-            <span class="gold">Drip harder.</span>
-          </h2>
-          <p class="mt-5 max-w-xl text-base text-white/65 md:text-lg">
-            Elevate everyday wear with modern boys’ fashion built for comfort, attitude, and confidence. Fresh drops, premium materials, and island-wide delivery.
-          </p>
-
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a href="#shop" class="gold-bg rounded-full px-6 py-3 text-sm font-black uppercase tracking-[0.15em]">Shop now</a>
-            <a href="#collections" class="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-black uppercase tracking-[0.15em] text-white">Explore drops</a>
+    <main class="pb-24">
+      <section id="home" class="section-shell pt-4 pb-3">
+        <div class="rounded-[1.7rem] border border-white/10 bg-[#121212] p-3 shadow-lg shadow-black/20">
+          <div class="mb-3 flex items-center justify-between">
+            <p class="text-[9px] font-bold uppercase tracking-[0.35em] text-yellow-300">New Drop</p>
+            <span class="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[8px] text-white/70">Free delivery</span>
           </div>
 
-          <div class="mt-9 flex flex-wrap items-center gap-8 text-sm text-white/70">
-            <div>
-              <p class="text-2xl font-black text-white">10k+</p>
-              <span>happy customers</span>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="overflow-hidden rounded-[1.2rem]">
+              <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Boy wearing modern outfit" class="hero-image" loading="eager" decoding="async" />
             </div>
-            <div>
-              <p class="text-2xl font-black text-white">4.9/5</p>
-              <span>customer rating</span>
+            <div class="overflow-hidden rounded-[1.2rem]">
+              <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Boy fashion portrait" class="hero-image" loading="eager" decoding="async" />
             </div>
-            <div>
-              <p class="text-2xl font-black text-white">24H</p>
-              <span>quick dispatch</span>
+          </div>
+
+          <div class="mt-4">
+            <p class="text-[10px] uppercase tracking-[0.25em] text-white/45">Premium boys streetwear</p>
+            <h2 class="mt-2 bebas text-4xl leading-none text-white">
+              DRIP <span class="gold">SMART</span>
+            </h2>
+            <p class="mt-2 text-sm text-white/65">Clean fits. Bold looks. Everyday confidence.</p>
+            <div class="mt-4 flex gap-2">
+              <a href="#shop" class="gold-bg flex-1 rounded-full px-4 py-3 text-center text-[10px] font-black uppercase tracking-[0.15em]">Shop now</a>
+              <button id="heroCart" class="rounded-full border border-white/10 bg-white/5 px-4 py-3 text-[10px] font-black uppercase tracking-[0.15em] text-white">Cart</button>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="relative">
-          <div class="absolute -left-6 top-10 h-52 w-52 rounded-full bg-yellow-300/20 blur-3xl"></div>
-          <div class="absolute -right-8 bottom-8 h-56 w-56 rounded-full bg-amber-200/10 blur-3xl"></div>
-          <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#121212] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Boys fashion styling" class="h-[620px] w-full rounded-[1.5rem] object-cover" loading="eager" decoding="async" />
+      <section class="section-shell py-2">
+        <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">All</button>
+          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Streetwear</button>
+          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Essentials</button>
+          <button class="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Urban</button>
+        </div>
+      </section>
+
+      <section id="collections" class="section-shell py-4">
+        <div class="mb-3 flex items-center justify-between">
+          <h3 class="bebas text-3xl text-white">Popular picks</h3>
+          <a href="#shop" class="text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-300">See all</a>
+        </div>
+        <div id="featuredProducts" class="grid grid-cols-2 gap-3"></div>
+      </section>
+
+      <section id="shop" class="section-shell py-4">
+        <div class="mb-3 flex items-center justify-between">
+          <h3 class="bebas text-3xl text-white">Shop</h3>
+          <select id="sortSelect" class="rounded-full border border-white/10 bg-[#1b1b1b] px-2 py-2 text-[10px] text-white focus:outline-none">
+            <option value="featured">Featured</option>
+            <option value="low-high">Low to high</option>
+            <option value="high-low">High to low</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+        <div id="productGrid" class="grid grid-cols-2 gap-3"></div>
+      </section>
+
+      <section id="reviews" class="section-shell py-5">
+        <div class="mb-3">
+          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Reviews</p>
+          <h3 class="mt-1 bebas text-3xl text-white">Loved by parents</h3>
+        </div>
+        <div class="space-y-3">
+          <div class="rounded-[1.4rem] border border-white/10 bg-white/5 p-3">
+            <div class="mb-2 text-yellow-400 text-xs">★★★★★</div>
+            <p class="text-sm text-white/80">“Perfect fit and premium feel.”</p>
+          </div>
+          <div class="rounded-[1.4rem] border border-white/10 bg-white/5 p-3">
+            <div class="mb-2 text-yellow-400 text-xs">★★★★★</div>
+            <p class="text-sm text-white/80">“My son loved the outfit instantly.”</p>
           </div>
         </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <div class="section-shell flex items-center justify-between py-2">
+        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+          <span>🏠</span>
+          <span>Home</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+          <span>🧥</span>
+          <span>Shop</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+          <span>🛒</span>
+          <span>Cart</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[10px] text-white/80">
+          <span>👤</span>
+          <span>Profile</span>
+        </button>
       </div>
-    </section>
-
-    <section class="section-shell pb-12">
-      <div class="grid gap-4 md:grid-cols-4">
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-          <div class="mb-3 text-2xl">🔥</div>
-          <p class="text-lg font-bold">Streetwear</p>
-          <p class="text-sm text-white/50">Fresh oversized fits</p>
-        </div>
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-          <div class="mb-3 text-2xl">🧥</div>
-          <p class="text-lg font-bold">Essentials</p>
-          <p class="text-sm text-white/50">Daily comfort wear</p>
-        </div>
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-          <div class="mb-3 text-2xl">⚡</div>
-          <p class="text-lg font-bold">Urban Style</p>
-          <p class="text-sm text-white/50">Sharper looks</p>
-        </div>
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
-          <div class="mb-3 text-2xl">🎁</div>
-          <p class="text-lg font-bold">Gift Ready</p>
-          <p class="text-sm text-white/50">Easy gifting options</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="collections" class="section-shell py-16">
-      <div class="mb-8 flex items-end justify-between gap-4">
-        <div>
-          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Featured</p>
-          <h3 class="mt-2 bebas text-5xl text-white">Popular collections</h3>
-        </div>
-        <a href="#shop" class="text-sm font-semibold text-yellow-300 underline underline-offset-8">Explore all</a>
-      </div>
-
-      <div id="featuredProducts" class="grid gap-6 md:grid-cols-4"></div>
-    </section>
-
-    <section id="shop" class="bg-[#111111] py-16">
-      <div class="section-shell">
-        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Catalogue</p>
-            <h3 class="mt-2 bebas text-5xl text-white">Shop the drop</h3>
-          </div>
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
-            <select id="sortSelect" class="rounded-full border border-white/10 bg-[#1b1b1b] px-4 py-2 text-sm text-white focus:outline-none">
-              <option value="featured">Featured</option>
-              <option value="low-high">Price: Low to High</option>
-              <option value="high-low">Price: High to Low</option>
-              <option value="name">Name</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="productGrid" class="grid gap-6 md:grid-cols-4"></div>
-      </div>
-    </section>
-
-    <section class="section-shell py-16">
-      <div class="grid gap-8 md:grid-cols-3">
-        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
-          <div class="mb-4 text-3xl">✅</div>
-          <h4 class="text-2xl font-black">Premium quality</h4>
-          <p class="mt-3 text-white/60">Made with durable fabrics and clean modern finishing for long-lasting wear.</p>
-        </div>
-        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
-          <div class="mb-4 text-3xl">🚚</div>
-          <h4 class="text-2xl font-black">Island-wide delivery</h4>
-          <p class="mt-3 text-white/60">Fast shipping across Sri Lanka with careful packaging and reliable handling.</p>
-        </div>
-        <div class="rounded-[2rem] border border-white/10 bg-[#111111] p-7">
-          <div class="mb-4 text-3xl">💬</div>
-          <h4 class="text-2xl font-black">Easy ordering</h4>
-          <p class="mt-3 text-white/60">Order directly through WhatsApp or complete the secure checkout flow below.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="reviews" class="section-shell py-16">
-      <div class="mb-10 text-center">
-        <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Reviews</p>
-        <h3 class="mt-2 bebas text-5xl text-white">What customers say</h3>
-      </div>
-
-      <div class="grid gap-6 md:grid-cols-3">
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
-          <div class="mb-4 text-yellow-400">★★★★★</div>
-          <p class="text-white/80">“The quality is excellent and the fit is perfect. My son wears them everywhere.”</p>
-          <div class="mt-6">
-            <p class="font-bold text-white">Nimal R.</p>
-            <p class="text-sm text-white/45">Verified buyer</p>
-          </div>
-        </div>
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
-          <div class="mb-4 text-yellow-400">★★★★★</div>
-          <p class="text-white/80">“Very stylish and comfortable. We’ve ordered twice already and the service was smooth.”</p>
-          <div class="mt-6">
-            <p class="font-bold text-white">Ashen K.</p>
-            <p class="text-sm text-white/45">Verified buyer</p>
-          </div>
-        </div>
-        <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
-          <div class="mb-4 text-yellow-400">★★★★★</div>
-          <p class="text-white/80">“The design feels premium and the delivery was fast. Definitely worth it.”</p>
-          <div class="mt-6">
-            <p class="font-bold text-white">Rashad S.</p>
-            <p class="text-sm text-white/45">Verified buyer</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="border-t border-white/10 bg-white/5 py-16">
-      <div class="section-shell flex flex-col items-center justify-between gap-8 text-center md:flex-row md:text-left">
-        <div>
-          <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Stay in touch</p>
-          <h3 class="mt-2 bebas text-5xl text-white">Get the latest drops</h3>
-        </div>
-
-        <div class="flex w-full max-w-xl flex-col gap-3 sm:flex-row">
-          <input id="newsletterEmail" type="email" placeholder="Enter your email" class="w-full rounded-full border border-white/10 bg-[#101010] px-5 py-3 text-white placeholder:text-white/40 focus:border-yellow-400/60 focus:outline-none" />
-          <button class="gold-bg rounded-full px-6 py-3 text-sm font-black uppercase tracking-[0.15em]">Subscribe</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t border-white/10 bg-black py-8">
-    <div class="section-shell flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-      <div>
-        <p class="bebas text-3xl tracking-[0.12em] text-yellow-300">SHASAN DRIP CO</p>
-      </div>
-      <div class="flex flex-wrap items-center gap-4 text-sm text-white/60">
-        <a href="#shop" class="hover:text-white">Shop</a>
-        <a href="#collections" class="hover:text-white">Collections</a>
-        <a href="#reviews" class="hover:text-white">Reviews</a>
-        <a href="https://wa.me/94778014156" target="_blank" class="hover:text-white">WhatsApp</a>
-      </div>
-      <p class="text-sm text-white/45">© 2026 Shasan Drip Co</p>
-    </div>
-  </footer>
+    </nav>
+  </div>
 
   <aside id="cartDrawer" class="fixed inset-0 z-50 hidden">
     <div class="absolute inset-0 bg-black/70" id="cartBackdrop"></div>
@@ -584,48 +504,40 @@
       if (!grid || !featured) return;
 
       featured.innerHTML = featuredList.map(product => `
-        <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111]">
+        <article class="product-card overflow-hidden rounded-[1.2rem] border border-white/10 bg-[#111111]">
           <div class="overflow-hidden">
-            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
+            <img src="${product.image}" alt="${product.name}" class="h-36 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
           </div>
-          <div class="p-4">
-            <div class="mb-2 flex items-center justify-between gap-3">
-              <h4 class="text-lg font-black text-white">${product.name}</h4>
-              <span class="text-sm font-bold text-yellow-300">${money(product.price)}</span>
+          <div class="p-2">
+            <div class="mb-1">
+              <p class="text-[10px] text-yellow-300">${money(product.price)}</p>
+              <h4 class="text-xs font-black text-white">${product.name}</h4>
             </div>
-            <div class="flex gap-2">
-              <button data-view-product="${product.id}" class="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-white">View</button>
-              <button data-add-product="${product.id}" class="flex-1 rounded-full bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-black">Add</button>
-            </div>
+            <button data-add-product="${product.id}" class="w-full rounded-full bg-white px-3 py-2 text-[9px] font-black uppercase tracking-[0.12em] text-black">Add</button>
           </div>
         </article>
       `).join('');
 
       if (!visible.length) {
         grid.innerHTML = `
-          <div class="md:col-span-4 rounded-[1.5rem] border border-dashed border-white/15 bg-[#111111] p-10 text-center">
-            <p class="text-2xl font-black">No products found</p>
-            <p class="mt-2 text-white/55">Try a different keyword or category.</p>
+          <div class="col-span-2 rounded-[1.5rem] border border-dashed border-white/15 bg-[#111111] p-6 text-center">
+            <p class="text-lg font-black">No products found</p>
+            <p class="mt-2 text-xs text-white/55">Try a different keyword or category.</p>
           </div>
         `;
       } else {
         grid.innerHTML = visible.map(product => `
-          <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
+          <article class="product-card overflow-hidden rounded-[1.2rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
             <div class="overflow-hidden">
-              <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
+              <img src="${product.image}" alt="${product.name}" class="h-36 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
             </div>
-            <div class="p-4">
-              <div class="mb-3 flex items-center justify-between gap-2">
-                <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-yellow-300">
-                  ${product.category}
-                </span>
-                <span class="text-lg font-black text-white">${money(product.price)}</span>
+            <div class="p-2">
+              <div class="mb-1 flex items-center justify-between gap-2">
+                <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2 py-0.5 text-[8px] font-bold uppercase tracking-[0.12em] text-yellow-300">${product.category}</span>
+                <span class="text-[10px] font-black text-white">${money(product.price)}</span>
               </div>
-              <h4 class="mb-4 text-lg font-black text-white">${product.name}</h4>
-              <div class="flex gap-2">
-                <button data-view-product="${product.id}" class="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-white">View</button>
-                <button data-add-product="${product.id}" class="flex-1 gold-bg rounded-full px-4 py-3 text-sm font-black uppercase tracking-[0.12em]">Add</button>
-              </div>
+              <h4 class="mb-2 text-xs font-black text-white">${product.name}</h4>
+              <button data-add-product="${product.id}" class="gold-bg w-full rounded-full px-3 py-2 text-[9px] font-black uppercase tracking-[0.12em]">Add</button>
             </div>
           </article>
         `).join('');
@@ -961,6 +873,7 @@
     }
 
     document.getElementById('cartToggle').addEventListener('click', openCart);
+    document.getElementById('heroCart').addEventListener('click', openCart);
     document.getElementById('cartBackdrop').addEventListener('click', closeCart);
     document.getElementById('closeCart').addEventListener('click', closeCart);
     document.getElementById('checkoutBtn').addEventListener('click', openCheckout);
@@ -974,16 +887,12 @@
     document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
     document.getElementById('productModalBackdrop').addEventListener('click', closeProductDetail);
     document.getElementById('closeProductDetail').addEventListener('click', closeProductDetail);
-    document.getElementById('searchInput').addEventListener('input', function () {
-      state.searchQuery = this.value;
-      renderProducts();
-    });
     document.getElementById('sortSelect').addEventListener('change', function () {
       state.sortBy = this.value;
       renderProducts();
     });
 
-    document.getElementById('newsletterEmail').addEventListener('keydown', function (event) {
+    document.getElementById('newsletterEmail')?.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         showToast('Thanks for subscribing');
         this.value = '';
@@ -991,7 +900,6 @@
     });
 
     renderBrand();
-    renderCategoryFilters();
     renderProducts();
     renderAdminProducts();
     updateCart();
