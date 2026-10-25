@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SHASAN DRIP CO</title>
   <meta name="description" content="Shasan Drip Co - premium boys streetwear, modern outfits, island-wide delivery." />
+  <meta name="theme-color" content="#0b0b0b" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -12,21 +13,31 @@
   <style>
     :root {
       --bg: #0b0b0b;
+      --bg-2: #15110d;
       --panel: #111111;
       --panel-2: #171717;
-      --text: #ffffff;
-      --muted: #a1a1aa;
+      --text: #f7f3ee;
+      --muted: #cfc4b8;
       --gold: #f5d76e;
       --gold-2: #d4af37;
       --soft: #f5f0ea;
+      --soft-2: #e9dfd1;
+      --brown: #2a2019;
       --card: rgba(255,255,255,0.03);
       --stroke: rgba(255,255,255,0.08);
+      --brand-ink: #120d09;
+      --brand-terracotta: #b76d3a;
+      --brand-gold: #f5d36b;
+      --brand-cream: #f7f4ee;
     }
 
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background: #050505;
+      background: 
+        radial-gradient(circle at top left, rgba(245, 215, 110, 0.08), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(183, 109, 58, 0.08), transparent 30%),
+        var(--bg);
       color: var(--text);
       line-height: 1.5;
     }
@@ -52,19 +63,30 @@
     .product-card:hover img { transform: scale(1.05); }
     .scrollbar-hide::-webkit-scrollbar { display: none; }
     .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    img {
+      content-visibility: auto;
+      loading: lazy;
+    }
   </style>
 </head>
 <body>
   <header class="sticky top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-    <div class="section-shell flex items-center justify-between py-4">
-      <div class="flex items-center gap-3">
-        <div id="logoBox" class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212]">
-          <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" />
-          <span id="logoFallback" class="bebas text-2xl tracking-wide text-yellow-300">S</span>
+    <div class="section-shell flex items-center justify-between py-4 gap-4">
+      <div class="flex items-center gap-3 min-w-0">
+        <div id="logoBox" class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border border-yellow-400/40 bg-[#121212] shadow-lg shadow-yellow-500/10">
+          <img id="logoImg" src="" alt="Brand logo" class="hidden h-full w-full object-cover" loading="eager" decoding="async" />
+          <span id="logoFallback" class="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_30%_30%,#f7d778,#d8a83d_55%,#7a4e26_100%)] text-2xl font-black text-[#120d09]">S</span>
         </div>
-        <div>
-          <h1 id="brandName" class="bebas text-3xl tracking-[0.12em] text-yellow-300 leading-none">SHASAN DRIP CO</h1>
+        <div class="min-w-0">
+          <h1 id="brandName" class="bebas text-2xl tracking-[0.12em] text-yellow-300 leading-none sm:text-3xl">SHASAN DRIP CO</h1>
           <p class="text-[10px] uppercase tracking-[0.28em] text-white/40">Trincomalee • since 2024</p>
+        </div>
+      </div>
+
+      <div class="hidden flex-1 max-w-md items-center justify-center md:flex">
+        <div class="flex w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2">
+          <span class="text-lg">🔎</span>
+          <input id="searchInput" type="text" placeholder="Search outfits..." class="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none" />
         </div>
       </div>
 
@@ -127,7 +149,7 @@
           <div class="absolute -left-6 top-10 h-52 w-52 rounded-full bg-yellow-300/20 blur-3xl"></div>
           <div class="absolute -right-8 bottom-8 h-56 w-56 rounded-full bg-amber-200/10 blur-3xl"></div>
           <div class="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#121212] p-3 shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
-            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80" alt="Boys fashion styling" class="h-[620px] w-full rounded-[1.5rem] object-cover" />
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Boys fashion styling" class="h-[620px] w-full rounded-[1.5rem] object-cover" loading="eager" decoding="async" />
           </div>
         </div>
       </div>
@@ -177,7 +199,15 @@
             <p class="text-[10px] font-bold uppercase tracking-[0.35em] text-white/45">Catalogue</p>
             <h3 class="mt-2 bebas text-5xl text-white">Shop the drop</h3>
           </div>
-          <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div id="categoryFilters" class="flex flex-wrap gap-2"></div>
+            <select id="sortSelect" class="rounded-full border border-white/10 bg-[#1b1b1b] px-4 py-2 text-sm text-white focus:outline-none">
+              <option value="featured">Featured</option>
+              <option value="low-high">Price: Low to High</option>
+              <option value="high-low">Price: High to Low</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
         </div>
 
         <div id="productGrid" class="grid gap-6 md:grid-cols-4"></div>
@@ -414,37 +444,59 @@
     </div>
   </aside>
 
-  <div id="toast" class="fixed bottom-6 left-1/2 z-[80] hidden -translate-x-1/2 rounded-full bg-white px-4 py-2 text-sm font-bold text-black shadow-xl"></div>
+  <div id="productDetailModal" class="fixed inset-0 z-[80] hidden">
+    <div class="absolute inset-0 bg-black/70" id="productModalBackdrop"></div>
+    <div class="absolute left-1/2 top-1/2 w-[92%] max-w-4xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0d0d] shadow-2xl">
+      <div class="grid md:grid-cols-2">
+        <img id="detailImage" src="" alt="Product" class="h-full max-h-[70vh] w-full object-cover" loading="lazy" decoding="async" />
+        <div class="p-6 md:p-8">
+          <div class="mb-4 flex items-center justify-between gap-3">
+            <span id="detailCategory" class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-yellow-300">Category</span>
+            <button id="closeProductDetail" class="rounded-full border border-white/15 px-3 py-1 text-sm">Close</button>
+          </div>
+          <h4 id="detailName" class="bebas text-4xl text-white">Product Name</h4>
+          <p id="detailPrice" class="mt-4 text-3xl font-black text-yellow-300">LKR 0</p>
+          <p id="detailDescription" class="mt-5 text-white/70">
+            Premium boys streetwear designed with comfort, confidence, and everyday movement in mind.
+          </p>
+          <div class="mt-6 flex items-center gap-3">
+            <button id="detailAddToCart" class="gold-bg rounded-full px-5 py-3 text-sm font-black uppercase tracking-[0.15em]">Add to cart</button>
+            <button id="detailBuyNow" class="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-black uppercase tracking-[0.15em] text-white">Buy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 z-[90] hidden -translate-x-1/2 rounded-full bg-white px-4 py-2 text-sm font-bold text-black shadow-xl"></div>
 
   <script>
     const defaultProducts = [
-      { id: 1, name: 'Urban Street Hoodie', price: 4990, category: 'streetwear', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80' },
-      { id: 2, name: 'Signature Tee Gold', price: 2990, category: 'essentials', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80' },
-      { id: 3, name: 'Classic Oversized Set', price: 5490, category: 'urban', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80' },
-      { id: 4, name: 'Minimal Street Fit', price: 4590, category: 'streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80' },
-      { id: 5, name: 'Premium School Tee', price: 2890, category: 'essentials', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80' },
-      { id: 6, name: 'Gold Print Hoodie', price: 5990, category: 'urban', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80' },
-      { id: 7, name: 'Weekend Casual Set', price: 5190, category: 'streetwear', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80' },
-      { id: 8, name: 'Gift Combo Pack', price: 6400, category: 'gift', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80' }
+      { id: 1, name: 'Urban Street Hoodie', price: 4990, category: 'streetwear', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=700&q=80', description: 'A premium oversized hoodie built for comfort and modern street energy.' },
+      { id: 2, name: 'Signature Tee Gold', price: 2990, category: 'essentials', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80', description: 'Classic everyday tee with a crisp, sharp print and a lightweight feel.' },
+      { id: 3, name: 'Classic Oversized Set', price: 5490, category: 'urban', image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=700&q=80', description: 'A standout urban outfit that balances style, ease, and confidence.' },
+      { id: 4, name: 'Minimal Street Fit', price: 4590, category: 'streetwear', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80', description: 'Minimal, sharp, and sporty for all-day wear and easy styling.' },
+      { id: 5, name: 'Premium School Tee', price: 2890, category: 'essentials', image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=700&q=80', description: 'Comfort-focused tee with clean detailing and a modern fit for school or hangouts.' },
+      { id: 6, name: 'Gold Print Hoodie', price: 5990, category: 'urban', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=700&q=80', description: 'Bold branding and premium cotton feel for a confident statement look.' },
+      { id: 7, name: 'Weekend Casual Set', price: 5190, category: 'streetwear', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=700&q=80', description: 'Relaxed fit with elevated styling, ideal for everyday comfort and looks.' },
+      { id: 8, name: 'Gift Combo Pack', price: 6400, category: 'gift', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80', description: 'A curated set designed for gifting with personality and premium finish.' }
     ];
 
     const state = {
       activeCategory: 'all',
+      searchQuery: '',
+      sortBy: 'featured',
       cart: JSON.parse(localStorage.getItem('shasan_cart') || '[]'),
       products: JSON.parse(localStorage.getItem('shasan_products') || 'null') || defaultProducts,
       brand: localStorage.getItem('shasan_brand') || 'SHASAN DRIP CO',
-      logo: localStorage.getItem('shasan_logo') || ''
+      logo: localStorage.getItem('shasan_logo') || '',
+      selectedProductId: null
     };
 
     const money = value => `LKR ${Number(value).toLocaleString('en-LK')}`;
 
-    function saveCart() {
-      localStorage.setItem('shasan_cart', JSON.stringify(state.cart));
-    }
-
-    function saveProducts() {
-      localStorage.setItem('shasan_products', JSON.stringify(state.products));
-    }
+    function saveCart() { localStorage.setItem('shasan_cart', JSON.stringify(state.cart)); }
+    function saveProducts() { localStorage.setItem('shasan_products', JSON.stringify(state.products)); }
 
     function showToast(message) {
       const toast = document.getElementById('toast');
@@ -458,32 +510,29 @@
       const brandName = document.getElementById('brandName');
       const brandInput = document.getElementById('brandInput');
       const title = document.querySelector('title');
+      const logoImg = document.getElementById('logoImg');
+      const logoFallback = document.getElementById('logoFallback');
 
       if (brandName) brandName.textContent = state.brand.toUpperCase();
       if (brandInput) brandInput.value = state.brand;
       if (title) title.textContent = state.brand.toUpperCase();
-
-      const logoImg = document.getElementById('logoImg');
-      const logoFallback = document.getElementById('logoFallback');
 
       if (state.logo) {
         if (logoImg) {
           logoImg.src = state.logo;
           logoImg.classList.remove('hidden');
         }
-        if (logoFallback) logoFallback.classList.add('hidden');
+        if (logoFallback) logoFallback.style.display = 'none';
       } else {
         if (logoImg) {
           logoImg.src = '';
           logoImg.classList.add('hidden');
         }
-        if (logoFallback) logoFallback.classList.remove('hidden');
+        if (logoFallback) logoFallback.style.display = 'flex';
       }
     }
 
-    function getCategories() {
-      return ['all', ...new Set(state.products.map(p => p.category))];
-    }
+    function getCategories() { return ['all', ...new Set(state.products.map(p => p.category))]; }
 
     function renderCategoryFilters() {
       const filters = document.getElementById('categoryFilters');
@@ -504,54 +553,122 @@
       });
     }
 
+    function getVisibleProducts() {
+      let list = [...state.products];
+
+      if (state.activeCategory !== 'all') {
+        list = list.filter(item => item.category === state.activeCategory);
+      }
+
+      if (state.searchQuery.trim()) {
+        const q = state.searchQuery.trim().toLowerCase();
+        list = list.filter(item => item.name.toLowerCase().includes(q) || item.category.toLowerCase().includes(q));
+      }
+
+      switch (state.sortBy) {
+        case 'low-high': list.sort((a, b) => a.price - b.price); break;
+        case 'high-low': list.sort((a, b) => b.price - a.price); break;
+        case 'name': list.sort((a, b) => a.name.localeCompare(b.name)); break;
+        default: list = list.slice();
+      }
+
+      return list;
+    }
+
     function renderProducts() {
       const grid = document.getElementById('productGrid');
       const featured = document.getElementById('featuredProducts');
+      const visible = getVisibleProducts();
+      const featuredList = state.products.slice(0, 4);
 
       if (!grid || !featured) return;
-
-      const filteredProducts = state.activeCategory === 'all'
-        ? state.products
-        : state.products.filter(item => item.category === state.activeCategory);
-
-      const featuredList = state.products.slice(0, 4);
 
       featured.innerHTML = featuredList.map(product => `
         <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111]">
           <div class="overflow-hidden">
-            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover" />
+            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
           </div>
           <div class="p-4">
             <div class="mb-2 flex items-center justify-between gap-3">
               <h4 class="text-lg font-black text-white">${product.name}</h4>
               <span class="text-sm font-bold text-yellow-300">${money(product.price)}</span>
             </div>
-            <button data-add-product="${product.id}" class="w-full rounded-full bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-black">Add to cart</button>
+            <div class="flex gap-2">
+              <button data-view-product="${product.id}" class="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-white">View</button>
+              <button data-add-product="${product.id}" class="flex-1 rounded-full bg-white px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-black">Add</button>
+            </div>
           </div>
         </article>
       `).join('');
 
-      grid.innerHTML = filteredProducts.map(product => `
-        <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
-          <div class="overflow-hidden">
-            <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover" />
+      if (!visible.length) {
+        grid.innerHTML = `
+          <div class="md:col-span-4 rounded-[1.5rem] border border-dashed border-white/15 bg-[#111111] p-10 text-center">
+            <p class="text-2xl font-black">No products found</p>
+            <p class="mt-2 text-white/55">Try a different keyword or category.</p>
           </div>
-          <div class="p-4">
-            <div class="mb-3 flex items-center justify-between gap-2">
-              <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-yellow-300">
-                ${product.category}
-              </span>
-              <span class="text-lg font-black text-white">${money(product.price)}</span>
+        `;
+      } else {
+        grid.innerHTML = visible.map(product => `
+          <article class="product-card overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#111111] shadow-lg shadow-black/20">
+            <div class="overflow-hidden">
+              <img src="${product.image}" alt="${product.name}" class="h-72 w-full object-cover cursor-pointer" data-view-product="${product.id}" loading="lazy" decoding="async" />
             </div>
-            <h4 class="mb-4 text-lg font-black text-white">${product.name}</h4>
-            <button data-add-product="${product.id}" class="gold-bg w-full rounded-full px-4 py-3 text-sm font-black uppercase tracking-[0.12em]">Add to cart</button>
-          </div>
-        </article>
-      `).join('');
+            <div class="p-4">
+              <div class="mb-3 flex items-center justify-between gap-2">
+                <span class="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-yellow-300">
+                  ${product.category}
+                </span>
+                <span class="text-lg font-black text-white">${money(product.price)}</span>
+              </div>
+              <h4 class="mb-4 text-lg font-black text-white">${product.name}</h4>
+              <div class="flex gap-2">
+                <button data-view-product="${product.id}" class="flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm font-black uppercase tracking-[0.12em] text-white">View</button>
+                <button data-add-product="${product.id}" class="flex-1 gold-bg rounded-full px-4 py-3 text-sm font-black uppercase tracking-[0.12em]">Add</button>
+              </div>
+            </div>
+          </article>
+        `).join('');
+      }
 
       document.querySelectorAll('[data-add-product]').forEach(button => {
         button.addEventListener('click', () => addToCart(Number(button.dataset.addProduct)));
       });
+
+      document.querySelectorAll('[data-view-product]').forEach(button => {
+        button.addEventListener('click', () => openProductDetail(Number(button.dataset.viewProduct)));
+      });
+    }
+
+    function openProductDetail(productId) {
+      const product = state.products.find(item => item.id === productId);
+      if (!product) return;
+
+      state.selectedProductId = productId;
+      const modal = document.getElementById('productDetailModal');
+      const detailImage = document.getElementById('detailImage');
+      const detailCategory = document.getElementById('detailCategory');
+      const detailName = document.getElementById('detailName');
+      const detailPrice = document.getElementById('detailPrice');
+      const detailDescription = document.getElementById('detailDescription');
+
+      detailImage.src = product.image;
+      detailCategory.textContent = product.category;
+      detailName.textContent = product.name;
+      detailPrice.textContent = money(product.price);
+      detailDescription.textContent = product.description || 'Premium boys streetwear designed with comfort, confidence, and everyday movement in mind.';
+      modal.classList.remove('hidden');
+
+      document.getElementById('detailAddToCart').onclick = () => addToCart(productId);
+      document.getElementById('detailBuyNow').onclick = () => {
+        addToCart(productId);
+        openCart();
+        closeProductDetail();
+      };
+    }
+
+    function closeProductDetail() {
+      document.getElementById('productDetailModal').classList.add('hidden');
     }
 
     function addToCart(productId) {
@@ -567,6 +684,7 @@
 
       saveCart();
       updateCart();
+      closeProductDetail();
       showToast(`${product.name} added to cart`);
     }
 
@@ -594,11 +712,7 @@
         const product = state.products.find(item => item.id === cartItem.id);
         if (!product) return null;
         const quantity = cartItem.quantity;
-        return {
-          ...product,
-          quantity,
-          total: product.price * quantity
-        };
+        return { ...product, quantity, total: product.price * quantity };
       }).filter(Boolean);
 
       const subtotal = items.reduce((sum, item) => sum + item.total, 0);
@@ -636,7 +750,7 @@
         cartItems.innerHTML = items.map(item => `
           <div class="rounded-[1.5rem] border border-white/10 bg-[#111111] p-3">
             <div class="flex gap-3">
-              <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-2xl object-cover" />
+              <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-2xl object-cover" loading="lazy" decoding="async" />
               <div class="flex-1">
                 <div class="flex items-start justify-between gap-2">
                   <div>
@@ -767,7 +881,8 @@
           name,
           price,
           category,
-          image
+          image,
+          description: 'Freshly added product from the admin panel built for the Shasan Drip Co store.'
         };
 
         state.products.unshift(newProduct);
@@ -787,7 +902,7 @@
 
       list.innerHTML = state.products.map(product => `
         <div class="flex items-center gap-3 rounded-[1.3rem] border border-white/10 bg-[#121212] p-3">
-          <img src="${product.image}" class="h-16 w-16 rounded-2xl object-cover" alt="${product.name}" />
+          <img src="${product.image}" class="h-16 w-16 rounded-2xl object-cover" alt="${product.name}" loading="lazy" decoding="async" />
           <div class="flex-1 min-w-0">
             <p class="truncate text-sm font-bold text-white">${product.name}</p>
             <p class="text-xs text-yellow-300">${money(product.price)}</p>
@@ -857,6 +972,16 @@
     document.getElementById('saveBrandBtn').addEventListener('click', saveBrand);
     document.getElementById('addProductBtn').addEventListener('click', addProductFromAdmin);
     document.getElementById('checkoutForm').addEventListener('submit', handleCheckoutSubmit);
+    document.getElementById('productModalBackdrop').addEventListener('click', closeProductDetail);
+    document.getElementById('closeProductDetail').addEventListener('click', closeProductDetail);
+    document.getElementById('searchInput').addEventListener('input', function () {
+      state.searchQuery = this.value;
+      renderProducts();
+    });
+    document.getElementById('sortSelect').addEventListener('change', function () {
+      state.sortBy = this.value;
+      renderProducts();
+    });
 
     document.getElementById('newsletterEmail').addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
