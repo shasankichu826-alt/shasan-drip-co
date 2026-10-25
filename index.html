@@ -3,93 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHASAN DRIP CO | Boys Collection - Trincomalee</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<title id="pageTitle">SHASAN DRIP CO</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  body{font-family:'Inter',sans-serif; background:#070707; color:white;}
-  .bebas{font-family:'Bebas Neue',sans-serif;}
-  .gold-bg{background: linear-gradient(135deg, #D4AF37, #FFD700);}
+body{font-family:'Inter',sans-serif;background:#050505;color:#fff}
+.bebas{font-family:'Bebas Neue'} .gold{color:#FFD700} .gold-bg{background:linear-gradient(135deg,#D4AF37,#FFD700)}
+.glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);border:1px solid rgba(255,215,0,0.1)}
 </style>
 </head>
 <body>
-<nav class="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-yellow-600/20">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-500 to-yellow-700 flex items-center justify-center font-black text-black">SD</div>
-      <div><h1 class="bebas text-2xl tracking-widest text-yellow-500">SHASAN DRIP CO</h1><p class="text-[9px] tracking-[0.3em] text-white/50 -mt-1">BOYS COLLECTION • TRINCO</p></div>
-    </div>
-    <button onclick="openCart()" class="relative bg-white/10 p-3 rounded-full">🛒 <span id="cartCount" class="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span></button>
-  </div>
+
+<nav class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-500/10">
+<div class="max-w-7xl mx-auto px-5 py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div id="logoBox" class="w-12 h-12 rounded-full gold-bg flex items-center justify-center font-black text-black text-xl overflow-hidden"><img id="logoImg" src="" class="w-full h-full object-cover hidden"><span id="logoText">S</span></div>
+<div><h1 id="brandName" class="bebas text-3xl tracking-widest leading-none gold">SHASAN DRIP CO</h1><p class="text-[10px] tracking-[0.4em] text-white/40">TRINCOMALEE • EST 2024</p></div>
+</div>
+<div class="flex gap-2">
+<button onclick="openAdmin()" class="bg-white text-black px-5 py-2 rounded-full text-xs font-black">EDIT SHOP ⚙️</button>
+<button onclick="openCart()" class="relative gold-bg p-3 rounded-full text-black">🛒 <span id="cartCount" class="absolute -top-2 -right-2 bg-white text-black text-xs w-6 h-6 rounded-full flex items-center justify-center font-black">0</span></button>
+</div>
+</div>
 </nav>
 
-<section class="relative bg-black py-16 md:py-28 px-6">
-  <div class="max-w-7xl mx-auto">
-    <p class="text-yellow-500 tracking-[0.4em] text-sm mb-4">NEW DROP • TRINCOMALEE</p>
-    <h2 class="bebas text-6xl md:text-8xl leading-none">ELEVATE<br><span class="text-yellow-500">YOUR DRIP</span></h2>
-    <p class="text-white/60 mt-4 max-w-md">Premium Streetwear. Select → Add to Cart → WhatsApp Order. Bank Transfer & COD.</p>
-    <div class="mt-8 flex gap-3">
-      <a href="#shop" class="gold-bg text-black px-8 py-3 rounded-full font-black">SHOP NOW</a>
-      <a href="https://wa.me/94778014156" target="_blank" class="border border-yellow-500/50 px-8 py-3 rounded-full text-yellow-500">WHATSAPP</a>
-    </div>
-  </div>
+<section class="px-6 py-16 text-center md:text-left">
+<div class="max-w-7xl mx-auto">
+<p class="text-yellow-500 tracking-[0.4em] text-xs mb-4">ADMIN EDITABLE STORE</p>
+<h2 class="bebas text-6xl md:text-8xl leading-none">MANAGE<br><span class="gold">YOUR DRIP</span></h2>
+<p class="text-white/40 mt-4 max-w-lg">Top right la EDIT SHOP click panni nee than dress, logo, price ellam maathalam da machaan!</p>
+</div>
 </section>
 
-<div class="bg-yellow-500 text-black flex justify-around py-3 text-xs font-black">
-  <span>✓ WHATSAPP ORDER</span><span>✓ BANK TRANSFER</span><span>✓ ISLAND DELIVERY</span>
+<div id="productGrid" class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-5 pb-20"></div>
+
+<footer class="py-10 text-center border-t border-yellow-500/10"><p id="footerBrand" class="bebas text-2xl gold">SHASAN DRIP CO</p><p class="text-xs text-white/20 mt-2">0778014156 | 0751415841</p></footer>
+
+<!-- CART -->
+<div id="cartDrawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/80" onclick="closeCart()"></div><div class="absolute right-0 top-0 h-full w-full max-w-sm bg-[#0F0F0F] p-6 flex flex-col"><div class="flex justify-between mb-6"><h4 class="bebas text-3xl">CART</h4><button onclick="closeCart()">×</button></div><div id="cartItems" class="flex-1 overflow-auto space-y-3"></div><div class="border-t border-yellow-500/10 pt-4 mt-4"><input id="custName" placeholder="Your Name" class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm mb-2"><input id="custCity" placeholder="City / Address" class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm mb-4"><div class="flex justify-between mb-4"><span>TOTAL</span><span id="cartTotal" class="gold font-black">LKR 0</span></div><button onclick="checkoutWhatsApp(1)" class="w-full bg-[#25D366] text-black py-4 rounded-full font-black mb-2">ORDER 0778014156</button><button onclick="checkoutWhatsApp(2)" class="w-full bg-white text-black py-3 rounded-full font-bold">ORDER 0751415841</button></div></div></div>
+
+<!-- ADMIN PANEL -->
+<div id="adminDrawer" class="fixed inset-0 z-[110] hidden"><div class="absolute inset-0 bg-black/90" onclick="closeAdmin()"></div><div class="absolute right-0 top-0 h-full w-full max-w-[480px] bg-[#111] border-l border-yellow-500/20 p-6 overflow-auto">
+<div class="flex justify-between mb-6"><h3 class="bebas text-4xl gold">EDIT SHOP</h3><button onclick="closeAdmin()" class="w-10 h-10 border rounded-full">×</button></div>
+
+<div class="bg-yellow-500/10 border border-yellow-500/20 rounded-2xl p-4 mb-6">
+<p class="font-black text-sm mb-3">1. LOGO & BRAND MAATHU DA</p>
+<label class="text-xs text-white/50">Shop Name</label><input id="editBrand" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3" placeholder="SHASAN DRIP CO">
+<label class="text-xs text-white/50">Logo Image (Phone la irunthu select pannu)</label><input type="file" id="editLogo" accept="image/*" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3">
+<div class="flex gap-2"><button onclick="saveBrand()" class="flex-1 gold-bg text-black py-2 rounded-full font-black text-xs">SAVE BRAND</button><button onclick="resetLogo()" class="flex-1 border py-2 rounded-full text-xs">RESET</button></div>
 </div>
 
-<section id="shop" class="max-w-7xl mx-auto px-4 py-12">
-  <h3 class="bebas text-4xl mb-8">SHOP DRIP - WHATSAPP ORDER</h3>
-  <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-</section>
-
-<section class="bg-white/[0.02] py-10 text-center border-y border-yellow-500/10">
-  <p class="bebas text-2xl mb-4">HOW TO ORDER?</p>
-  <p class="text-sm text-white/50 mb-6">1. Add to Cart → 2. Checkout → 3. WhatsApp la order varum → Bank details anupuvom</p>
-  <div class="flex justify-center gap-2">
-    <a href="https://wa.me/94778014156" class="bg-[#25D366] text-black px-5 py-2 rounded-full text-xs font-bold">0778014156</a>
-    <a href="https://wa.me/94751415841" class="bg-white text-black px-5 py-2 rounded-full text-xs font-bold">0751415841</a>
-  </div>
-</section>
-
-<footer class="py-10 text-center text-white/20 text-xs">SHASAN DRIP CO © 2026 | Trincomalee | WhatsApp: 0778014156 / 0751415841</footer>
-
-<div id="cartDrawer" class="fixed inset-0 z-[100] hidden">
-  <div class="absolute inset-0 bg-black/80" onclick="closeCart()"></div>
-  <div class="absolute right-0 top-0 h-full w-full max-w-sm bg-[#111] p-6 flex flex-col">
-    <div class="flex justify-between mb-6"><h4 class="bebas text-3xl">YOUR CART</h4><button onclick="closeCart()">×</button></div>
-    <div id="cartItems" class="flex-1 overflow-auto space-y-3"></div>
-    <div class="border-t border-yellow-500/20 pt-4 mt-4">
-      <div class="flex justify-between mb-4"><span>Total</span><span id="cartTotal" class="text-yellow-500 font-bold">LKR 0</span></div>
-      <button onclick="checkoutWhatsApp(1)" class="w-full bg-[#25D366] text-black py-4 rounded-full font-black mb-2">ORDER TO 0778014156</button>
-      <button onclick="checkoutWhatsApp(2)" class="w-full bg-white text-black py-3 rounded-full font-bold">ORDER TO 0751415841</button>
-    </div>
-  </div>
+<div class="bg-white/5 border border-white/10 rounded-2xl p-4 mb-6">
+<p class="font-black text-sm mb-3">2. PUTHU DRESS ADD PANNU DA</p>
+<input id="pName" placeholder="Dress Name (ex: BLACK HOODIE)" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2">
+<input id="pPrice" type="number" placeholder="Price (ex: 5990)" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2">
+<select id="pCat" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-2"><option value="hoodie">Hoodie</option><option value="tee">Tee</option><option value="jacket">Jacket</option><option value="pant">Pant</option></select>
+<label class="text-xs text-white/50">Dress Photo (Phone Gallery la irunthu)</label><input type="file" id="pImage" accept="image/*" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-sm mb-3">
+<button onclick="addProduct()" class="w-full bg-white text-black py-3 rounded-full font-black">+ ADD DRESS TO SHOP</button>
+<p class="text-[10px] text-white/20 mt-2">Photo select panna than add pannu da, auto save aayidum!</p>
 </div>
+
+<div class="mb-6">
+<p class="font-black text-sm mb-3">3. IRUKURA DRESS-A DELETE / EDIT PANNU</p>
+<div id="adminProductList" class="space-y-2"></div>
+</div>
+
+<button onclick="clearAllProducts()" class="w-full border border-red-500/30 text-red-400 py-3 rounded-full text-xs">CLEAR ALL DRESSES</button>
+<p class="text-[10px] text-white/20 text-center mt-4">Ellam phone la save aayidum da, refresh pannalum pogathu!</p>
+</div></div>
 
 <script>
-const products = [
-  {id:1, name:"OVERSIZED HOODIE BLACK GOLD", price:5990, img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500"},
-  {id:2, name:"CROWN DRIP GRAPHIC TEE", price:2990, img:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500"},
-  {id:3, name:"ESSENTIAL HOODIE SHASAN", price:5490, img:"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500"},
-  {id:4, name:"DRIP CO TEE GOLD PRINT", price:2890, img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500"},
-  {id:5, name:"STREET KING OVERSIZED TEE", price:3290, img:"https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=500"},
-  {id:6, name:"TRINCO DRIP HOODIE", price:5990, img:"https://images.unsplash.com/photo-1620799139652-715239583449?w=500"},
-  {id:7, name:"GOLD CROWN BOXY TEE", price:3490, img:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500"},
-  {id:8, name:"PREMIUM DRIP JACKET", price:7990, img:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500"},
+let products = JSON.parse(localStorage.getItem('shasan_products')) || 'null');
+if(!products){
+products = [
+{id:1, name:"OVERSIZED HOODIE BLACK GOLD", price:5990, img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800", cat:"hoodie"},
+{id:2, name:"CROWN DRIP GRAPHIC TEE", price:2990, img:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800", cat:"tee"},
+{id:3, name:"ESSENTIAL HOODIE SHASAN", price:5490, img:"https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800", cat:"hoodie"},
+{id:4, name:"DRIP CO TEE GOLD PRINT", price:2890, img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800", cat:"tee"},
 ];
-let cart = [];
-const grid = document.getElementById('productGrid');
-products.forEach(p=>{
-  grid.innerHTML += `<div class="bg-[#111] border border-white/5 rounded-2xl overflow-hidden"><img src="${p.img}" class="w-full aspect-square object-cover"><div class="p-3"><p class="text-[11px] h-8">${p.name}</p><p class="text-yellow-500 font-bold mt-2">LKR ${p.price}</p><button onclick="addToCart(${p.id})" class="w-full mt-3 bg-white text-black py-2 rounded-full text-xs font-bold">ADD TO CART</button></div></div>`;
+}
+let brand = localStorage.getItem('shasan_brand') || 'SHASAN DRIP CO';
+let logo = localStorage.getItem('shasan_logo') || '';
+let cart=[];
+
+function saveToStorage(){ localStorage.setItem('shasan_products', JSON.stringify(products)); }
+function loadBrand(){ document.getElementById('brandName').innerText=brand; document.getElementById('footerBrand').innerText=brand; document.getElementById('pageTitle').innerText=brand; document.getElementById('editBrand').value=brand; document.getElementById('logoText').innerText=brand.charAt(0); if(logo){ document.getElementById('logoImg').src=logo; document.getElementById('logoImg').classList.remove('hidden'); document.getElementById('logoText').classList.add('hidden'); } }
+loadBrand();
+
+function renderProducts(){
+const grid=document.getElementById('productGrid'); const adminList=document.getElementById('adminProductList');
+grid.innerHTML=''; adminList.innerHTML='';
+products.forEach((p,i)=>{
+grid.innerHTML+=`<div class="glass rounded-2xl overflow-hidden group"><img src="${p.img}" class="w-full aspect-square object-cover"><div class="p-3"><p class="text-[11px] font-bold h-8">${p.name}</p><div class="flex justify-between items-center mt-2"><span class="gold font-black text-sm">LKR ${p.price}</span><span class="text-[9px] bg-white/10 px-2 py-1 rounded-full">${p.cat}</span></div><button onclick="addToCart(${p.id})" class="w-full mt-3 bg-white text-black py-2 rounded-full text-xs font-black">ADD TO CART</button></div></div>`;
+adminList.innerHTML+=`<div class="flex gap-2 bg-black p-2 rounded-xl"><img src="${p.img}" class="w-12 h-12 rounded object-cover"><div class="flex-1"><p class="text-xs font-bold">${p.name}</p><p class="text-xs gold">LKR ${p.price}</p></div><button onclick="deleteProduct(${i})" class="bg-red-500/20 text-red-400 px-3 rounded-full text-xs">DELETE</button></div>`;
 });
-function addToCart(id){ cart.push(products.find(x=>x.id===id)); updateCart(); }
+}
+
+function addProduct(){
+let name=document.getElementById('pName').value; let price=document.getElementById('pPrice').value; let cat=document.getElementById('pCat').value; let file=document.getElementById('pImage').files[0];
+if(!name||!price||!file){alert('Name, Price, Photo ellam podu da machaan!'); return;}
+let reader=new FileReader(); reader.onload=function(e){
+products.unshift({id:Date.now(), name:name.toUpperCase(), price:parseInt(price), img:e.target.result, cat:cat});
+saveToStorage(); renderProducts(); document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pImage').value=''; alert('Dress add aayiduchu da! 🔥');
+}; reader.readAsDataURL(file);
+}
+function deleteProduct(i){ if(confirm('Delete panava da?')){ products.splice(i,1); saveToStorage(); renderProducts(); } }
+function clearAllProducts(){ if(confirm('Full ah clear panava?')){ products=[]; saveToStorage(); renderProducts(); } }
+
+function saveBrand(){
+let newBrand=document.getElementById('editBrand').value; let file=document.getElementById('editLogo').files[0];
+if(newBrand){ brand=newBrand.toUpperCase(); localStorage.setItem('shasan_brand', brand); }
+if(file){ let r=new FileReader(); r.onload=function(e){ logo=e.target.result; localStorage.setItem('shasan_logo', logo); loadBrand(); alert('Logo maathi aachu da!'); }; r.readAsDataURL(file); } else { loadBrand(); alert('Brand name save aayiduchu da!'); }
+}
+function resetLogo(){ localStorage.removeItem('shasan_logo'); localStorage.removeItem('shasan_brand'); brand='SHASAN DRIP CO'; logo=''; document.getElementById('logoImg').classList.add('hidden'); document.getElementById('logoText').classList.remove('hidden'); loadBrand(); }
+
+function addToCart(id){ cart.push(products.find(x=>x.id===id)); updateCart(); openCart(); }
 function updateCart(){ document.getElementById('cartCount').innerText=cart.length; let total=0, html=''; cart.forEach((c,i)=>{ total+=c.price; html+=`<div class="flex gap-3 bg-white/5 p-3 rounded-xl"><img src="${c.img}" class="w-12 h-12 rounded"><div class="flex-1"><p class="text-xs">${c.name}</p><p class="text-yellow-500 text-xs">LKR ${c.price}</p></div><button onclick="removeCart(${i})">×</button></div>`; }); document.getElementById('cartItems').innerHTML=html||'<p class="text-white/30 text-center mt-10">Cart empty da!</p>'; document.getElementById('cartTotal').innerText='LKR '+total; }
-function removeCart(i){cart.splice(i,1); updateCart();}
-function openCart(){document.getElementById('cartDrawer').classList.remove('hidden');}
-function closeCart(){document.getElementById('cartDrawer').classList.add('hidden');}
-function checkoutWhatsApp(num){ if(cart.length===0){alert('Cart empty!'); return;} let total=cart.reduce((a,b)=>a+b.price,0); let msg=`*NEW ORDER - SHASAN DRIP CO*%0A%0A`; cart.forEach((c,i)=>{ msg+=`${i+1}. ${c.name} - LKR ${c.price}%0A`; }); msg+=`%0A*Total: LKR ${total}*%0APayment: Bank Transfer%0A%0AName:%0AAddress:%0A`; let phone=num===1?"94778014156":"94751415841"; window.open(`https://wa.me/${phone}?text=${msg}`, '_blank'); }
+function removeCart(i){ cart.splice(i,1); updateCart(); }
+function openCart(){ document.getElementById('cartDrawer').classList.remove('hidden'); }
+function closeCart(){ document.getElementById('cartDrawer').classList.add('hidden'); }
+function openAdmin(){ document.getElementById('adminDrawer').classList.remove('hidden'); renderProducts(); }
+function closeAdmin(){ document.getElementById('adminDrawer').classList.add('hidden'); }
+function checkoutWhatsApp(num){ if(cart.length===0){alert('Cart empty!'); return;} let name=document.getElementById('custName').value||'Customer'; let city=document.getElementById('custCity').value||''; let total=cart.reduce((a,b)=>a+b.price,0); let msg=`*NEW ORDER - ${brand}*%0A%0AName: ${name}%0ACity: ${city}%0A%0A`; cart.forEach((c,i)=>{ msg+=`${i+1}. ${c.name} - LKR ${c.price}%0A`; }); msg+=`%0ATotal: LKR ${total}%0A`; let phone=num===1?"94778014156":"94751415841"; window.open(`https://wa.me/${phone}?text=${msg}`, '_blank'); }
+renderProducts();
 </script>
 </body>
 </html>
